@@ -32,16 +32,17 @@ class MainMenuState extends FlxState
 		// sidebar.x = FlxG.width * 2;
 		sidebar.screenCenter();
 		add(sidebar);
-
-		blackshit = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		blackshit.screenCenter();
-		add(blackshit);
-
+		
 		vignette = new FlxSprite().loadGraphic("assets/images/vignette.png");
 		vignette.setGraphicSize(Std.int(vignette.width * 1.5));
 		vignette.screenCenter();
 		vignette.antialiasing = true;
 		add(vignette);
+
+		blackshit = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		blackshit.screenCenter();
+		add(blackshit);
+
 
 		super.create();
 
