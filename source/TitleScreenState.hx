@@ -21,7 +21,8 @@ class TitleScreenState extends FlxState
 	var titletxt:FlxText;
 	var pressEnter:FlxText;
 	// var camAlphaTwn:FlxTween;
-	var vignetteTwn:FlxTween;
+	// var vignetteTwn:FlxTween;
+	var bleckTwn:FlxTween;
 	var transparencyVal:Float = 0.65;
 	var canSelect:Bool = false;
 	var mouseVisible:Bool = true;
@@ -60,9 +61,9 @@ class TitleScreenState extends FlxState
 		}});
 		*/
 
-		FlxTween.tween(bleck, {alpha: transparencyVal}, 3.5), {onComplete: function(twn:FlxTween) {
+		bleckTwn = FlxTween.tween(bleck, {alpha: transparencyVal}, 3.5, {onComplete: function(twn:FlxTween) {
 			canSelect = true;
-		}};
+		}});
 		/*
 		vignetteTwn = FlxTween.tween(vignette, {alpha: transparencyVal}, 3.5, {onComplete: function(twn:FlxTween) {
 			canSelect = true;
@@ -75,7 +76,7 @@ class TitleScreenState extends FlxState
 		if (canSelect) {
 			if (FlxG.keys.justPressed.ENTER) {
 				enterSound.play();
-				FlxTween.tween(bleck, {alpha: 1}, vignetteTwn.duration);
+				FlxTween.tween(bleck, {alpha: 1}, bleckTwn.duration);
 				new FlxTimer().start(vignetteTwn.duration, function(tmr:FlxTimer) {
 					FlxG.switchState(new MainMenuState());
 				});
