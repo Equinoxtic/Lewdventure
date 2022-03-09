@@ -5,7 +5,7 @@ import flixel.FlxSprite;
 import flixel.text.FlxText;
 using StringTools;
 
-class LoadingScreen extends FlxState
+class LoadingState extends FlxState
 {
 	var werningTxt:FlxText;
 
