@@ -24,6 +24,10 @@ class MainMenuState extends FlxState
 	// var camAlphaTwn:FlxTween;
 	override public function create()
 	{
+		if (!FlxG.mouse.visible) {
+			FlxG.mouse.visible = true;
+		}
+		
 		bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
 		bg.screenCenter();
 		add(bg);
@@ -32,7 +36,7 @@ class MainMenuState extends FlxState
 		// sidebar.x = FlxG.width * 2;
 		sidebar.screenCenter();
 		add(sidebar);
-		
+
 		vignette = new FlxSprite().loadGraphic("assets/images/vignette.png");
 		vignette.setGraphicSize(Std.int(vignette.width * 1.5));
 		vignette.screenCenter();
