@@ -54,8 +54,9 @@ class TitleScreenState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		if (canSelect && FlxG.keys.justPressed.ENTER) {
-			FlxTween.tween(FlxG.camera, {alpha: 0}, camAlphaTwn.duration);
+			canSelect = false;
 			enterSound.play();
+			FlxTween.tween(FlxG.camera, {alpha: 0}, camAlphaTwn.duration);
 			new FlxTimer().start(camAlphaTwn.duration, function(tmr:FlxTimer) {
 				FlxG.switchState(new MainMenuState());
 			});
