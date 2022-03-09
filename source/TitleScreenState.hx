@@ -77,7 +77,7 @@ class TitleScreenState extends FlxState
 			if (FlxG.keys.justPressed.ENTER) {
 				enterSound.play();
 				FlxTween.tween(bleck, {alpha: 1}, bleckTwn.duration);
-				new FlxTimer().start(vignetteTwn.duration, function(tmr:FlxTimer) {
+				new FlxTimer().start(bleckTwn.duration, function(tmr:FlxTimer) {
 					FlxG.switchState(new MainMenuState());
 				});
 			}
