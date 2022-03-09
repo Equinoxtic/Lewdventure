@@ -11,6 +11,11 @@ class LoadingState extends FlxState
 
 	override public function create() 
 	{
+		werningTxt = new FlxText(0, 0, 0, "", 15);
+		werningTxt.text = "WARNING\n" + "This game contains sexual and mature content.\n" + "Play it in a dark room all alone, and without your parents around you.\n" + "Enjoy the game, cupcake ;)";
+		werningTxt.screenCenter();
+		add(werningTxt);
+
 		super.create();
 	}
 
