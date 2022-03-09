@@ -61,9 +61,10 @@ class TitleScreenState extends FlxState
 		}});
 		*/
 
-		bleckTwn = FlxTween.tween(bleck, {alpha: transparencyVal}, 3.5, {onComplete: function(twn:FlxTween) {
+		bleckTwn = FlxTween.tween(bleck, {alpha: transparencyVal}, 1.35, {onComplete: function(twn:FlxTween) {
 			canSelect = true;
 		}});
+
 		/*
 		vignetteTwn = FlxTween.tween(vignette, {alpha: transparencyVal}, 3.5, {onComplete: function(twn:FlxTween) {
 			canSelect = true;
