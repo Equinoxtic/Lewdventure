@@ -27,14 +27,13 @@ class MainMenuState extends FlxState
 		if (!FlxG.mouse.visible) {
 			FlxG.mouse.visible = true;
 		}
-		
+
 		bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
 		bg.screenCenter();
 		add(bg);
 
-		sidebar = new FlxSprite().makeGraphic(50, FlxG.height, FlxColor.BLACK);
-		// sidebar.x = FlxG.width * 2;
-		sidebar.screenCenter();
+		sidebar = new FlxSprite().makeGraphic(75, FlxG.height, FlxColor.BLACK);
+		sidebar.x = FlxG.width * 15;
 		add(sidebar);
 
 		vignette = new FlxSprite().loadGraphic("assets/images/vignette.png");
