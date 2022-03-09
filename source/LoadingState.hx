@@ -2,7 +2,11 @@ package;
 
 import flixel.FlxState;
 import flixel.FlxSprite;
+import flixel.util.FlxColor;
 import flixel.text.FlxText;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
+
 using StringTools;
 
 class LoadingState extends FlxState
@@ -16,7 +20,13 @@ class LoadingState extends FlxState
 		werningTxt.screenCenter();
 		add(werningTxt);
 
+		var loadCube:FlxSprite = new FlxSprite().makeGraphic(2, 2, FlxColor.WHITE);
+		loadCube.screenCenter();
+		add(loadCube);
+
 		super.create();
+
+		FlxTween.tween(loadCube, {angle: 360}, 1.7, {ease: FlxEase.quartInOut, type: FlxTweenType.PINGPONG});
 	}
 
 	override public function update(elapsed:Float) 
