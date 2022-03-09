@@ -55,15 +55,12 @@ class TitleScreenState extends FlxState
 	{
 		if (canSelect) {
 			if (FlxG.keys.justPressed.ENTER) {
-				canSelect = false;
 				enterSound.play();
 				FlxTween.tween(FlxG.camera, {alpha: 0}, camAlphaTwn.duration);
 				new FlxTimer().start(camAlphaTwn.duration, function(tmr:FlxTimer) {
 					FlxG.switchState(new MainMenuState());
 				});
 			}
-		} else {
-			trace("Cannot Press.");
 		}
 		super.update(elapsed);
 	}
