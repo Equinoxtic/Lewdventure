@@ -1,19 +1,13 @@
 package;
 
+import flixel.FlxState;
 import flixel.FlxSprite;
-import flixel.FlxG;
-import flixel.tweens.FlxTween;
-import flixel.tweens.FlxEase;
-import flixel.system.FlxBasePreloader;
-
+import flixel.text.FlxText;
 using StringTools;
 
-class LoadingScreen extends FlxBasePreloader
+class LoadingScreen extends FlxState
 {
-	public function new(MinDisplayTime:Float = 0) 
-	{
-		super(2);
-	}
+	var werningTxt:FlxText;
 
 	override public function create() 
 	{
