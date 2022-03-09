@@ -39,23 +39,17 @@ class TitleScreenState extends FlxState
 			FlxG.sound.playMusic(AssetPaths.empty_ambience__ogg);
 		}
 
-		titletxt = new FlxText(0, 0, 0, "Lewdventure", 35);
+		titletxt = new FlxText(0, 0, 0, "Lewdventure", 50);
 		titletxt.screenCenter();
 		add(titletxt);
 
-		pressEnter = new FlxText(0, titletxt.y + 35, "Press Enter", 20);
+		pressEnter = new FlxText(0, titletxt.y + 75, "Press Enter", 20);
 		pressEnter.screenCenter(X);
 		add(pressEnter);
 
 		bleck = new FlxSprite().makeGraphic(FlxG.height, FlxG.width, FlxColor.BLACK);
 		bleck.screenCenter();
 		add(bleck);
-
-		vignette = new FlxSprite().loadGraphic("assets/images/vignette.png");
-		vignette.setGraphicSize(Std.int(vignette.width * 1.5));
-		vignette.screenCenter();
-		vignette.antialiasing = true;
-		add(vignette);
 
 		super.create();
 
@@ -66,10 +60,14 @@ class TitleScreenState extends FlxState
 		}});
 		*/
 
-		FlxTween.tween(bleck, {alpha: transparencyVal}, 3.5);
+		FlxTween.tween(bleck, {alpha: transparencyVal}, 3.5), {onComplete: function(twn:FlxTween) {
+			canSelect = true;
+		}};
+		/*
 		vignetteTwn = FlxTween.tween(vignette, {alpha: transparencyVal}, 3.5, {onComplete: function(twn:FlxTween) {
 			canSelect = true;
 		}});
+		*/
 	}
 
 	override public function update(elapsed:Float)
@@ -77,7 +75,6 @@ class TitleScreenState extends FlxState
 		if (canSelect) {
 			if (FlxG.keys.justPressed.ENTER) {
 				enterSound.play();
-				FlxTween.tween(vignette, {alpha: 1}, vignetteTwn.duration);
 				FlxTween.tween(bleck, {alpha: 1}, vignetteTwn.duration);
 				new FlxTimer().start(vignetteTwn.duration, function(tmr:FlxTimer) {
 					FlxG.switchState(new MainMenuState());
