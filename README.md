@@ -1,2 +1,2 @@
 # Lewd-Haxe
- Very Lewd Haxe Code
+Very lewd hentai game, made in Haxe
