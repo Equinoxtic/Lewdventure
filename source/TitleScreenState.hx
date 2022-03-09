@@ -46,6 +46,7 @@ class TitleScreenState extends FlxState
 
 		vignette = new FlxSprite().loadGraphic("assets/images/vignette.png");
 		vignette.setGraphicSize(Std.int(vignette.width * 1.5));
+		vignette.screenCenter();
 		vignette.antialiasing = true;
 		add(vignette);
 
