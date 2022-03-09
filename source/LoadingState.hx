@@ -18,6 +18,7 @@ class LoadingState extends FlxState
 		werningTxt = new FlxText(0, 0, 0, "", 15);
 		werningTxt.text = "WARNING\n" + "This game contains sexual and mature content.\n" + "Play it in a dark room all alone, and without your parents around you.\n" + "Enjoy the game, cupcake ;)";
 		werningTxt.screenCenter();
+		werningTxt.alpha = 0;
 		add(werningTxt);
 
 		var loadCube:FlxSprite = new FlxSprite().makeGraphic(2, 2, FlxColor.WHITE);
