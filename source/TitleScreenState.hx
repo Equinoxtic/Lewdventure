@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.FlxSprite;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
@@ -13,6 +14,7 @@ using StringTools;
 
 class TitleScreenState extends FlxState
 {
+	var vignette:FlxSprite;
 	// var ambience:FlxSound;
 	var enterSound:FlxSound;
 	var titletxt:FlxText;
@@ -42,10 +44,16 @@ class TitleScreenState extends FlxState
 		pressEnter.screenCenter(X);
 		add(pressEnter);
 
+		vignette = new FlxSprite().loadGraphic("assets/images/vignette.png");
+		vignette.setGraphicSize(Std.int(vignette.width * 1.5));
+		vignette.antialiasing = true;
+		add(vignette);
+
 		super.create();
 
 		FlxG.camera.alpha = 0;
 
+		FlxTween.tween(vignette, {alpha: 0.75}, 3.5);
 		camAlphaTwn = FlxTween.tween(FlxG.camera, {alpha: 1}, 3.5, {onComplete: function(twn:FlxTween) {
 			canSelect = true;
 		}});
@@ -56,6 +64,7 @@ class TitleScreenState extends FlxState
 		if (canSelect) {
 			if (FlxG.keys.justPressed.ENTER) {
 				enterSound.play();
+				FlxTween.tween(vignette, {alpha: 0}, 3.5);
 				FlxTween.tween(FlxG.camera, {alpha: 0}, camAlphaTwn.duration);
 				new FlxTimer().start(camAlphaTwn.duration, function(tmr:FlxTimer) {
 					FlxG.switchState(new MainMenuState());
