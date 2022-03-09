@@ -14,12 +14,15 @@ using StringTools;
 
 class TitleScreenState extends FlxState
 {
+	var bleck:FlxSprite;
 	var vignette:FlxSprite;
 	// var ambience:FlxSound;
 	var enterSound:FlxSound;
 	var titletxt:FlxText;
 	var pressEnter:FlxText;
-	var camAlphaTwn:FlxTween;
+	// var camAlphaTwn:FlxTween;
+	var vignetteTwn:FlxTween;
+	var transparencyVal:Float = 0.65;
 	var canSelect:Bool = false;
 	var mouseVisible:Bool = true;
 	override public function create()
@@ -44,6 +47,10 @@ class TitleScreenState extends FlxState
 		pressEnter.screenCenter(X);
 		add(pressEnter);
 
+		bleck = new FlxSprite().makeGraphic(FlxG.height, FlxG.width, FlxColor.BLACK);
+		bleck.screenCenter();
+		add(bleck);
+
 		vignette = new FlxSprite().loadGraphic("assets/images/vignette.png");
 		vignette.setGraphicSize(Std.int(vignette.width * 1.5));
 		vignette.screenCenter();
@@ -52,10 +59,15 @@ class TitleScreenState extends FlxState
 
 		super.create();
 
+		/*
 		FlxG.camera.alpha = 0;
-
-		FlxTween.tween(vignette, {alpha: 0.75}, 3.5);
 		camAlphaTwn = FlxTween.tween(FlxG.camera, {alpha: 1}, 3.5, {onComplete: function(twn:FlxTween) {
+			canSelect = true;
+		}});
+		*/
+
+		FlxTween.tween(bleck, {alpha: transparencyVal}, 3.5);
+		vignetteTwn = FlxTween.tween(vignette, {alpha: transparencyVal}, 3.5, {onComplete: function(twn:FlxTween) {
 			canSelect = true;
 		}});
 	}
@@ -65,9 +77,9 @@ class TitleScreenState extends FlxState
 		if (canSelect) {
 			if (FlxG.keys.justPressed.ENTER) {
 				enterSound.play();
-				FlxTween.tween(vignette, {alpha: 0}, 3.5);
-				FlxTween.tween(FlxG.camera, {alpha: 0}, camAlphaTwn.duration);
-				new FlxTimer().start(camAlphaTwn.duration, function(tmr:FlxTimer) {
+				FlxTween.tween(vignette, {alpha: 1}, vignetteTwn.duration);
+				FlxTween.tween(bleck, {alpha: 1}, vignetteTwn.duration);
+				new FlxTimer().start(vignetteTwn.duration, function(tmr:FlxTimer) {
 					FlxG.switchState(new MainMenuState());
 				});
 			}
