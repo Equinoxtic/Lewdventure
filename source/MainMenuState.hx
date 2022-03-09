@@ -28,7 +28,7 @@ class MainMenuState extends FlxState
 		bg.screenCenter();
 		add(bg);
 
-		sidebar = new FlxSprite().makeGraphic(10, FlxG.height, FlxColor.BLACK);
+		sidebar = new FlxSprite().makeGraphic(50, FlxG.height, FlxColor.BLACK);
 		// sidebar.x = FlxG.width * 2;
 		sidebar.screenCenter();
 		add(sidebar);
