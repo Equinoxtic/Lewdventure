@@ -23,7 +23,7 @@ class TitleScreenState extends FlxState
 	// var camAlphaTwn:FlxTween;
 	// var vignetteTwn:FlxTween;
 	var bleckTwn:FlxTween;
-	var transparencyVal:Float = 0.65;
+	var transparencyVal:Float = 0.45;
 	var canSelect:Bool = false;
 	var mouseVisible:Bool = true;
 	override public function create()
