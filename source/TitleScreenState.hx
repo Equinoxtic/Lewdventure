@@ -38,7 +38,7 @@ class TitleScreenState extends FlxState
 		titletxt.screenCenter();
 		add(titletxt);
 
-		pressEnter = new FlxText(0, titletxt.y + 25, "Press Enter", 20);
+		pressEnter = new FlxText(0, titletxt.y + 35, "Press Enter", 20);
 		pressEnter.screenCenter(X);
 		add(pressEnter);
 
