@@ -39,7 +39,7 @@ class TitleScreenState extends FlxState
 			FlxG.sound.playMusic(AssetPaths.empty_ambience__ogg);
 		}
 
-		titletxt = new FlxText(0, 0, 0, "Lewd Haxe", 35);
+		titletxt = new FlxText(0, 0, 0, "Lewdventure", 35);
 		titletxt.screenCenter();
 		add(titletxt);
 
