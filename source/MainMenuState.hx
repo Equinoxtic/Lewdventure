@@ -29,7 +29,7 @@ class MainMenuState extends FlxState
 
 	var menuIcons:FlxTypedGroup<FlxSprite>;
 	var iconShit:Array<String> = [
-		"home",
+		"play",
 		"settings",
 		"achievements",
 		"notifications",
@@ -39,7 +39,7 @@ class MainMenuState extends FlxState
 
 	var menuTxt:FlxTypedGroup<FlxText>;
 	var textShit:Array<String> = [
-		"Home",
+		"Play",
 		"Settings",
 		"Achievements",
 		"Notifications",
