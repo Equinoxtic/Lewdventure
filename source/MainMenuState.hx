@@ -210,8 +210,8 @@ class MainMenuState extends FlxState
 		{
 			switch (state)
 			{
-				case 'home':
-					FlxG.switchState(new MainMenuState());
+				case 'play':
+					FlxG.switchState(new PlayState());
 			}
 		});
 	}
