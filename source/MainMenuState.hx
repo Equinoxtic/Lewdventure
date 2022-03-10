@@ -206,8 +206,16 @@ class MainMenuState extends FlxState
 		});
 	}
 
-	function boundTo(value:Float, min:Float, max:Float):Float {
-		return Math.max(min, Math.min(max, value));
+	function goToState(state:String, time:Int)
+	{
+		new FlxTimer().start(time, function(tmr:FlxTimer)
+		{
+			switch (state)
+			{
+				case 'home':
+					FlxG.switchState(new MainMenuState());
+			}
+		});
 	}
 
 	function changeItem(num:Int=0) {
@@ -226,17 +234,6 @@ class MainMenuState extends FlxState
 					add = menuIcons.length * 7;
 				}
 				spr.centerOffsets();
-			}
-		});
-	}
-
-	function goToState(state:String, time:Int)
-	{
-		new FlxTimer().start(time, function(tmr:FlxTimer) {
-			switch(state)
-			{
-				case 'home':
-					FlxG.switchState(new MainMenuState());
 			}
 		});
 	}
