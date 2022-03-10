@@ -206,7 +206,7 @@ class MainMenuState extends FlxState
 		});
 	}
 
-	function goToState(state:String, time:Int)
+	function goToState(state:String, time:Float)
 	{
 		new FlxTimer().start(time, function(tmr:FlxTimer)
 		{
