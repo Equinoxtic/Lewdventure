@@ -33,7 +33,7 @@ class MainMenuState extends FlxState
 		"home",
 		"settings",
 		"achievements",
-		"notification",
+		"notifications",
 		"github",
 		"sound-test"
 	];
