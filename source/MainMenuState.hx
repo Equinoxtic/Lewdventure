@@ -159,20 +159,16 @@ class MainMenuState extends FlxState
 			{
 				selected = true;
 
-				clickSound.play();
+				if (clickSound == null) {
+					clickSound.play();
+				}
+
+				FlxTween.tween(blackshit, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
+				FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
 
 				menuIcons.forEach(function(spr:FlxSprite)
 				{
-					if (curSelected != spr.ID)
-					{
-						FlxTween.tween(spr, {alpha: 0}, 0.4, {
-							ease: FlxEase.quadOut,
-							onComplete: function(twn:FlxTween) {
-								spr.kill();
-							}
-						});
-					}
-					else 
+					if (curSelected == spr.ID)
 					{
 						var choice:String = iconShit[curSelected];
 
@@ -186,17 +182,6 @@ class MainMenuState extends FlxState
 						}
 					}
 				});
-				
-				menuTxt.forEach(function(txt:FlxText) {
-					if (curSelected != txt.ID) {
-						FlxTween.tween(txt, {alpha: 0}, 0.4, {
-							ease: FlxEase.quadOut,
-							onComplete: function(twn:FlxTween) {
-								txt.kill();
-							}
-						});
-					}
-				})
 			}
 		}
 		else
