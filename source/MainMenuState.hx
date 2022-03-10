@@ -186,6 +186,17 @@ class MainMenuState extends FlxState
 						}
 					}
 				});
+				
+				menuTxt.forEach(function(txt:FlxText) {
+					if (curSelected != txt.ID) {
+						FlxTween.tween(txt, {alpha: 0}, 0.4, {
+							ease: FlxEase.quadOut,
+							onComplete: function(twn:FlxTween) {
+								txt.kill();
+							}
+						});
+					}
+				})
 			}
 		}
 		else
