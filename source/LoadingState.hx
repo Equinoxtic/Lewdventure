@@ -20,7 +20,7 @@ class LoadingState extends FlxState
 	override public function create() 
 	{
 		FlxG.autoPause = false;
-		
+
 		if (FlxG.mouse.visible) {
 			FlxG.mouse.visible = false;
 		} else {
@@ -36,8 +36,8 @@ class LoadingState extends FlxState
 		add(werningTxt);
 
 		loadCube = new FlxSprite().makeGraphic(100, 100, FlxColor.WHITE);
-		loadCube.x = werningTxt.x + 175;
-		loadCube.y = werningTxt.y + 175;
+		loadCube.screenCenter(X);
+		loadCube.y = werningTxt.y + 235;
 		add(loadCube);
 
 		super.create();
