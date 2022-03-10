@@ -159,9 +159,7 @@ class MainMenuState extends FlxState
 			{
 				selected = true;
 
-				if (clickSound == null) {
-					clickSound.play();
-				}
+				clickSound.play();
 
 				FlxTween.tween(blackshit, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
 				FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
