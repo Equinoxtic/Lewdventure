@@ -19,6 +19,14 @@ class LoadingState extends FlxState
 
 	override public function create() 
 	{
+		FlxG.autoPause = false;
+		
+		if (FlxG.mouse.visible) {
+			FlxG.mouse.visible = false;
+		} else {
+			FlxG.mouse.visible = true;
+		}
+
 		werningTxt = new FlxText(0, 0, FlxG.width, "", 30);
 		werningTxt.text = "WARNING\n" + "This game contains sexual and mature content.\n" + "Play it in a dark room all alone, and without your parents around you.\n" + "Enjoy the game, cupcake~..";
 		werningTxt.alignment = CENTER;
@@ -28,8 +36,8 @@ class LoadingState extends FlxState
 		add(werningTxt);
 
 		loadCube = new FlxSprite().makeGraphic(100, 100, FlxColor.WHITE);
-		loadCube.x  = 350;
-		loadCube.y = werningTxt.y + 75;
+		loadCube.x = werningTxt.x + 175;
+		loadCube.y = werningTxt.y + 175;
 		add(loadCube);
 
 		super.create();
