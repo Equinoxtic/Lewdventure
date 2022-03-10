@@ -171,15 +171,7 @@ class MainMenuState extends FlxState
 					if (curSelected == spr.ID)
 					{
 						var choice:String = iconShit[curSelected];
-
-						switch(choice)
-						{
-							case 'home':
-								trace("Home");
-
-							case 'settings':
-								trace("Settings");
-						}
+						goToState(choice, 1.1);
 					}
 				});
 			}
@@ -234,6 +226,17 @@ class MainMenuState extends FlxState
 					add = menuIcons.length * 7;
 				}
 				spr.centerOffsets();
+			}
+		});
+	}
+
+	function goToState(state:String, time:Int)
+	{
+		new FlxTimer().start(time, function(tmr:FlxTimer) {
+			switch(state)
+			{
+				case 'home':
+					FlxG.switchState(new MainMenuState());
 			}
 		});
 	}
