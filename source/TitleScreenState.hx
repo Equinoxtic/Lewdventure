@@ -25,15 +25,8 @@ class TitleScreenState extends FlxState
 	var bleckTwn:FlxTween;
 	var transparencyVal:Float = 0.45;
 	var canSelect:Bool = false;
-	var mouseVisible:Bool = true;
 	override public function create()
 	{
-		if (FlxG.mouse.visible) {
-			FlxG.mouse.visible = !mouseVisible;
-		} else {
-			FlxG.mouse.visible = mouseVisible;
-		}
-
 		enterSound = FlxG.sound.load(AssetPaths.enter_sound__ogg);
 
 		if (FlxG.sound.music == null) {
