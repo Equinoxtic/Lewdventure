@@ -5,11 +5,9 @@ import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.system.FlxSound;
-import flixel.addons.effects.FlxTrail;
 
 using StringTools;
 
