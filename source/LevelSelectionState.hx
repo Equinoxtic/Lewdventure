@@ -63,8 +63,8 @@ class LevelSelectionState extends FlxState
 
 		super.create();
 
-		vignetteTwn = FlxTween.tween(vignette, {alpha: 0.45}, 2.85, {ease: FlxEase.quartInOut});
-		blackShitTwn = FlxTween.tween(blackShit, {alpha: 0.45}, 2.85, {ease: FlxEase.quartInOut});
+		vignetteTwn = FlxTween.tween(vignette, {alpha: 0.45}, 1.1, {ease: FlxEase.quartInOut});
+		blackShitTwn = FlxTween.tween(blackShit, {alpha: 0.45}, 1.1, {ease: FlxEase.quartInOut});
 		new FlxTimer().start(vignetteTwn.duration, function(tmr:FlxTimer) {
 			canSelect = true;
 		});
