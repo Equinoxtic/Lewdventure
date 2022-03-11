@@ -27,7 +27,7 @@ class PlayState extends FlxState
 	{
 		moan = FlxG.sound.load(AssetPaths.animoo_moan__ogg);
 
-		player = new FlxSprite().makeGraphic(15, 15, FlxColor.BLUE);
+		player = new FlxSprite().makeGraphic(25, 25, FlxColor.WHITE);
 		player.x = FlxG.width / 2 - player.width / 2;
 		player.y = FlxG.height / 2 - player.height / 2;
 		add(player);
