@@ -66,14 +66,14 @@ class MainMenuState extends FlxState
 
 		for (i in 0...iconShit.length)
 		{
-			var icons:FlxSprite = new FlxSprite(0, 20 + (i * 75)).loadGraphic("assets/images/icons/icon_" + iconShit[i] + ".png");
+			var icons:FlxSprite = new FlxSprite(0, 45 + (i * 75)).loadGraphic("assets/images/icons/icon_" + iconShit[i] + ".png");
 			icons.setGraphicSize(Std.int(icons.width * 0.45));
 			icons.antialiasing = true;
 			icons.ID = i;
 			menuIcons.add(icons);
 			icons.updateHitbox();
 
-			var daText:FlxText = new FlxText(0, 20 + (i * 75), FlxG.width, "", 25);
+			var daText:FlxText = new FlxText(0, 45 + (i * 75), FlxG.width, "", 25);
 			daText.setFormat(AssetPaths.CascadiaCodePL_Regular__ttf, 25, FlxColor.WHITE, LEFT);
 			daText.text = textShit[i];
 			daText.ID = i;
@@ -173,8 +173,7 @@ class MainMenuState extends FlxState
 			}
 			else
 			{
-				menuIcons.forEach(function(spr:FlxSprite)
-				{
+				menuIcons.forEach(function(spr:FlxSprite) {
 					if (spr.ID != curSelected) {
 						spr.alpha = 0.65;
 					}
