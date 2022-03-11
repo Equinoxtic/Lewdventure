@@ -175,13 +175,19 @@ class MainMenuState extends FlxState
 			{
 				menuIcons.forEach(function(spr:FlxSprite)
 				{
-					if (spr.ID == curSelected) {
+					if (spr.ID != curSelected) {
+						spr.alpha = 0.65;
+					}
+					else {
 						spr.alpha = 1;
 					}
 				});
 
 				menuTxt.forEach(function(txt:FlxText) {
-					if (txt.ID == curSelected) {
+					if (txt.ID != curSelected) {
+						txt.alpha = 0.65;
+					}
+					else {
 						txt.alpha = 1;
 					}
 				});
@@ -192,16 +198,10 @@ class MainMenuState extends FlxState
 
 		menuIcons.forEach(function(spr:FlxSprite) {
 			spr.x = 50;
-			if (spr.ID == curSelected) {
-				spr.alpha = 0.65;
-			}
 		});
 
 		menuTxt.forEach(function(txt:FlxText) {
 			txt.x = 100;
-			if (txt.ID == curSelected) {
-				txt.alpha = 0.65;
-			}
 		});
 	}
 
