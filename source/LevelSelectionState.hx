@@ -21,6 +21,8 @@ class LevelSelectionState extends FlxState
 	var lvlShit:Array<String> = [
 		"demo"
 	];
+	public static var currentChapter:String = "";
+	var chapterPrefix:String = "";
 	var canSelect:Bool = false;
 	
 	override public function create()
@@ -32,9 +34,16 @@ class LevelSelectionState extends FlxState
 		lvlList = new FlxTypedGroup<FlxSprite>();
 		add(lvlList);
 
+		switch (currentChapter)
+		{
+			case "first":
+				chapterPrefix = "first_chapter";
+		}
+
 		for (i in 0...lvlShit.length)
 		{
-			var lvlThumbnails:FlxSprite = new FlxSprite().loadGraphic("assets/images/levels/level_" + lvlShit[i] + ".png");
+			var lvlThumbnails:FlxSprite = new FlxSprite();
+			lvlThumbnails.loadGraphic("assets/images/levels/" + chapterPrefix + "/level_" + lvlShit[i] + ".png");
 			lvlThumbnails.setGraphicSize(Std.int(lvlThumbnails.width * 0.5));
 			lvlThumbnails.antialiasing = true;
 			lvlThumbnails.ID = i;
