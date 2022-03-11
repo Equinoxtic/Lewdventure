@@ -64,5 +64,8 @@ class ChapterSelectionState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		chapterList.forEach(function(spr:FlxSprite) {
+			spr.screenCenter(X);
+		});
 	}
 }
