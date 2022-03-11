@@ -112,8 +112,8 @@ class MainMenuState extends FlxState
 		}});
 		*/
 
-	 	blackshittwn = FlxTween.tween(blackshit, {alpha: 0.45}, 2.85, {ease: FlxEase.quartInOut});
-		vignettetwn = FlxTween.tween(vignette, {alpha: 0.45}, 2.85, {ease: FlxEase.quartInOut});
+	 	blackshittwn = FlxTween.tween(blackshit, {alpha: 0.45}, 1.85, {ease: FlxEase.quartInOut});
+		vignettetwn = FlxTween.tween(vignette, {alpha: 0.45}, 1.85, {ease: FlxEase.quartInOut});
 		new FlxTimer().start(blackshittwn.duration, function(tmr:FlxTimer) {
 			canSelect = true;
 		});
@@ -175,45 +175,33 @@ class MainMenuState extends FlxState
 			{
 				menuIcons.forEach(function(spr:FlxSprite)
 				{
-					if (spr.ID != curSelected) {
-						spr.alpha = 0.65;
-					}
-					else {
+					if (spr.ID == curSelected) {
 						spr.alpha = 1;
 					}
 				});
 
 				menuTxt.forEach(function(txt:FlxText) {
-					if (txt.ID != curSelected) {
-						txt.alpha = 0.65;
-					}
-					else {
+					if (txt.ID == curSelected) {
 						txt.alpha = 1;
 					}
 				});
 			}
-		}
-		else
-		{
-			menuIcons.forEach(function(spr:FlxSprite) {
-				spr.alpha = 0;
-				FlxTween.tween(spr, {alpha: 1}, 2.85, {ease: FlxEase.quartInOut});
-			});
-
-			menuTxt.forEach(function(txt:FlxSprite) {
-				txt.alpha = 0;
-				FlxTween.tween(txt, {alpha: 1}, 2.85, {ease: FlxEase.quartInOut});
-			});
 		}
 
 		super.update(elapsed);
 
 		menuIcons.forEach(function(spr:FlxSprite) {
 			spr.x = 50;
+			if (spr.ID == curSelected) {
+				spr.alpha = 0.65;
+			}
 		});
 
 		menuTxt.forEach(function(txt:FlxText) {
 			txt.x = 100;
+			if (txt.ID == curSelected) {
+				txt.alpha = 0.65
+			}
 		});
 	}
 
