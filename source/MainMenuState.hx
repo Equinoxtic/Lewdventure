@@ -1,15 +1,15 @@
 package;
 
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.util.FlxTimer;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.system.FlxSound;
+import flixel.group.FlxGroup.FlxTypedGroup;
 
 using StringTools;
 
@@ -162,10 +162,8 @@ class MainMenuState extends FlxState
 				FlxTween.tween(blackshit, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
 				FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
 
-				menuIcons.forEach(function(spr:FlxSprite)
-				{
-					if (curSelected == spr.ID)
-					{
+				menuIcons.forEach(function(spr:FlxSprite) {
+					if (curSelected == spr.ID) {
 						var choice:String = iconShit[curSelected];
 						goToState(choice, 1.1);
 					}
@@ -202,14 +200,11 @@ class MainMenuState extends FlxState
 		});
 	}
 
-	function goToState(state:String, time:Float)
-	{
-		new FlxTimer().start(time, function(tmr:FlxTimer)
-		{
-			switch (state)
-			{
+	function goToState(state:String, time:Float) {
+		new FlxTimer().start(time, function(tmr:FlxTimer) {
+			switch (state) {
 				case 'play':
-					FlxG.switchState(new PlayState());
+					FlxG.switchState(new ChapterSelectionState());
 			}
 		});
 	}
