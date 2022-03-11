@@ -27,7 +27,7 @@ class LevelSelectionState extends FlxState
 	
 	override public function create()
 	{
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GREY);
 		bg.screenCenter();
 		add(bg);
 
