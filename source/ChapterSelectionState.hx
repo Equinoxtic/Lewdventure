@@ -154,8 +154,8 @@ class ChapterSelectionState extends FlxState
 			switch(chapter) {
 				case 'limbo':
 					LevelSelectionState.currentChapter = 'limbo';
-					FlxG.switchState(new LevelSelectionState());
 			}
+			FlxG.switchState(new LevelSelectionState());
 		});
 	}
 
