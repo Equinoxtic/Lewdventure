@@ -80,9 +80,9 @@ class ChapterSelectionState extends FlxState
 		});
 	}
 
-	function goToChapter(state:String, time:Float) {
+	function goToChapter(chapter:String, time:Float) {
 		new FlxTimer().start(time, function(tmr:FlxTimer) {
-			switch(state) {
+			switch(chapter) {
 				case 'limbo':
 					LevelSelectionState.currentChapter = 'limbo';
 					FlxG.switchState(new LevelSelectionState());
