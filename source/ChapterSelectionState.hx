@@ -34,7 +34,7 @@ class ChapterSelectionState extends FlxState
 
 		for (i in 0...chapterShit.length)
 		{
-			var chapters:FlxSprite = new FlxSprite(0, (i * 20)).loadGraphic("assets/chapters/chapter_" + chapterShit[i] + ".png");
+			var chapters:FlxSprite = new FlxSprite((i * 20), 0).loadGraphic("assets/images/chapters/chapter_" + chapterShit[i] + ".png");
 			chapters.setGraphicSize(Std.int(chapters.width * 0.5));
 			chapters.antialiasing = true;
 			chapters.ID = i;
@@ -65,7 +65,7 @@ class ChapterSelectionState extends FlxState
 	{
 		super.update(elapsed);
 		chapterList.forEach(function(spr:FlxSprite) {
-			spr.screenCenter(X);
+			spr.screenCenter();
 		});
 	}
 }
