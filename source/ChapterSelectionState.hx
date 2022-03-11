@@ -25,6 +25,10 @@ class ChapterSelectionState extends FlxState
 
 	override public function create()
 	{
+		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
+		bg.screenCenter();
+		add(bg);
+		
 		chapterList = new FlxTypedGroup<FlxSprite>();
 		add(chapterList);
 
