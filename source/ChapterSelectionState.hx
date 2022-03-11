@@ -5,6 +5,7 @@ import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.system.FlxSound;
@@ -21,10 +22,17 @@ class ChapterSelectionState extends FlxState
 	var vignetteTwn:FlxTween;
 	var blackShitTwn:FlxTween;
 	var clickSound:FlxSound;
+
 	var chapterList:FlxTypedGroup<FlxSprite>;
 	var chapterShit:Array<String> = [
 		"limbo"
 	];
+	
+	var chapterText:FlxTypedGroup<FlxText>;
+	var chapterTextShit:Array<String> = [
+		"Limbo"
+	];
+
 	var canSelect:Bool = false;
 
 	override public function create()
@@ -38,14 +46,26 @@ class ChapterSelectionState extends FlxState
 		chapterList = new FlxTypedGroup<FlxSprite>();
 		add(chapterList);
 
+		chapterText = new FlxTypedGroup<FlxText>();
+		add(chapterText);
+
 		for (i in 0...chapterShit.length)
 		{
 			var chapters:FlxSprite = new FlxSprite((i * 20), 0).loadGraphic("assets/images/chapters/chapter_" + chapterShit[i] + ".png");
 			chapters.setGraphicSize(Std.int(chapters.width * 0.75));
+			chapters.alpha = 0.65;
 			chapters.antialiasing = true;
 			chapters.ID = i;
 			chapterList.add(chapters);
 			chapters.updateHitbox();
+
+			var theText:FlxText = new FlxText((i * 20), chapters.y - 50, FlxG.width, "", 30);
+			theText.setFormat(AssetPaths.CascadiaCodePL_Regular__ttf, 30, FlxColor.WHITE, CENTER);
+			theText.alpha = 0.65;
+			theText.text = chapterTextShit[i];
+			theText.ID = i;
+			chapterText.add(theText);
+			theText.updateHitbox();
 		}
 
 		vignette = new FlxSprite().loadGraphic("assets/images/vignette.png");
@@ -60,8 +80,8 @@ class ChapterSelectionState extends FlxState
 
 		super.create();
 
-		vignetteTwn = FlxTween.tween(vignette, {alpha: 0.45}, 2.85, {ease: FlxEase.quartInOut});
-		blackShitTwn = FlxTween.tween(blackShit, {alpha: 0.45}, 2.85, {ease: FlxEase.quartInOut});
+		vignetteTwn = FlxTween.tween(vignette, {alpha: 0.45}, 1.1, {ease: FlxEase.quartInOut});
+		blackShitTwn = FlxTween.tween(blackShit, {alpha: 0.45}, 1.1, {ease: FlxEase.quartInOut});
 		new FlxTimer().start(vignetteTwn.duration, function(tmr:FlxTimer) {
 			canSelect = true;
 		});
@@ -111,6 +131,13 @@ class ChapterSelectionState extends FlxState
 						spr.alpha = 0.65;
 					} else {
 						spr.alpha = 1;
+					}
+				});
+				chapterText.forEach(function(txt:FlxText) {
+					if (txt.ID != curSelected) {
+						txt.alpha = 0.65;
+					} else {
+						txt.alpha = 1;
 					}
 				});
 			}
