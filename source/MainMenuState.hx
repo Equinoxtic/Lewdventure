@@ -49,9 +49,9 @@ class MainMenuState extends FlxState
 
 	override public function create()
 	{
-		if (!FlxG.mouse.visible) {
-			FlxG.mouse.visible = true;
-		}
+		// if (!FlxG.mouse.visible) {
+		// 	FlxG.mouse.visible = true;
+		// }
 
 		clickSound = FlxG.sound.load(AssetPaths.enter_sound__ogg);
 
