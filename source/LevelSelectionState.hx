@@ -134,6 +134,22 @@ class LevelSelectionState extends FlxState
 			}
 		}
 
+		lvlList.forEach(function(spr:FlxSprite) {
+			if (spr.ID != curSelected) {
+				spr.alpha = 0.65;
+			} else {
+				spr.alpha = 1;
+			}
+		});
+
+		lvlTitleList.forEach(function(txt:FlxText) {
+			if (txt.ID != curSelected) {
+				txt.alpha = 0.65;
+			} else {
+				txt.alpha = 1;
+			}
+		});
+
 		super.update(elapsed);
 
 		lvlList.forEach(function(spr:FlxSprite) {
