@@ -9,16 +9,18 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.system.FlxSound;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import LevelSelectionState;
 
 using StringTools;
 
 class ChapterSelectionState extends FlxState
 {
+	public static var curSelected:Int = 0;
 	var vignette:FlxSprite;
 	var blackShit:FlxSprite;
 	var vignetteTwn:FlxTween;
 	var blackShitTwn:FlxTween;
-	var scrollSound:FlxSound;
+	var clickSound:FlxSound;
 	var chapterList:FlxTypedGroup<FlxSprite>;
 	var chapterShit:Array<String> = [
 		"limbo"
@@ -27,7 +29,7 @@ class ChapterSelectionState extends FlxState
 
 	override public function create()
 	{
-		scrollSound = FlxG.sound.load(AssetPaths.enter_sound__ogg);
+		clickSound = FlxG.sound.load(AssetPaths.enter_sound__ogg);
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
 		bg.screenCenter();
@@ -75,6 +77,46 @@ class ChapterSelectionState extends FlxState
 
 		chapterList.forEach(function(spr:FlxSprite) {
 			spr.screenCenter();
+		});
+	}
+
+	function goToChapter(state:String, time:Float) {
+		new FlxTimer().start(time, function(tmr:FlxTimer) {
+			switch(state) {
+				case 'limbo':
+					LevelSelectionState.currentChapter = 'limbo';
+					FlxG.switchState(new LevelSelectionState());
+			}
+		});
+	}
+
+	function doDaScroll(a:Int=0)
+	{
+		curSelected += a;
+		if (curSelected >= chapterList.length) {
+			curSelected = 0;
+		}
+		if (curSelected < 0) {
+			curSelected = chapterList.length - 1;
+		}
+		chapterList.forEach(function(spr:FlxSprite) {
+			spr.updateHitbox();
+			if (spr.ID == curSelected) {
+				var add:Float = 0;
+				if (chapterList.length > 4) {
+					add = chapterList.length * 1;
+				}
+			}
+		});
+	}
+
+	function returnToMainMenu()
+	{
+		clickSound.play();
+		FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
+		FlxTween.tween(blackShit, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
+		new FlxTimer().start(1.1, function(tmr:FlxTimer) {
+			FlxG.switchState(new MainMenuState());
 		});
 	}
 }
