@@ -121,28 +121,26 @@ class MainMenuState extends FlxState
 		});
 	}
 
-	var selected:Bool = false;
+	var selectedSmth:Bool = false;
 
 	override public function update(elapsed:Float)
 	{
-		if (canSelect)
+		if (canSelect && !selectedSmth)
 		{
-			if (FlxG.keys.justPressed.BACKSPACE) {
-				selected = true;
-				clickSound.play();
-				returnToTitle();
-			}
-
 			if (FlxG.keys.justPressed.UP) {
 				clickSound.play();
-				selected = true;
 				changeItem(-1);
 			}
 
 			if (FlxG.keys.justPressed.DOWN) {
 				clickSound.play();
-				selected = true;
 				changeItem(1);
+			}
+
+			if (FlxG.keys.justPressed.BACKSPACE) {
+				selectedSmth = true;
+				clickSound.play();
+				returnToTitle();
 			}
 
 			if (FlxG.keys.justPressed.ENTER)
@@ -158,7 +156,7 @@ class MainMenuState extends FlxState
 				}
 				else
 				{
-					selected = true;
+					selectedSmth = true;
 
 					clickSound.play();
 
@@ -173,27 +171,25 @@ class MainMenuState extends FlxState
 					});
 				}
 			}
-			else
-			{
-				menuIcons.forEach(function(spr:FlxSprite) {
-					if (spr.ID != curSelected) {
-						spr.alpha = 0.65;
-					}
-					else {
-						spr.alpha = 1;
-					}
-				});
-
-				menuTxt.forEach(function(txt:FlxText) {
-					if (txt.ID != curSelected) {
-						txt.alpha = 0.65;
-					}
-					else {
-						txt.alpha = 1;
-					}
-				});
-			}
 		}
+
+		menuIcons.forEach(function(spr:FlxSprite) {
+			if (spr.ID != curSelected) {
+				spr.alpha = 0.65;
+			}
+			else {
+				spr.alpha = 1;
+			}
+		});
+
+		menuTxt.forEach(function(txt:FlxText) {
+			if (txt.ID != curSelected) {
+				txt.alpha = 0.65;
+			}
+			else {
+				txt.alpha = 1;
+			}
+		});
 
 		super.update(elapsed);
 
@@ -230,7 +226,7 @@ class MainMenuState extends FlxState
 				if (menuIcons.length > 4) {
 					add = menuIcons.length * 7;
 				}
-				spr.centerOffsets();
+				// spr.centerOffsets(); Does it matter? :troll:
 			}
 		});
 	}
