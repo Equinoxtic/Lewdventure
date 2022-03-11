@@ -47,7 +47,7 @@ class PlayState extends FlxState
 		if (FlxG.keys.justPressed.SPACE) {
 			zoomin = true;
 			new FlxTimer().start(20, function(tmr:FlxTimer) {
-				zoomin = true;
+				zoomin = false;
 			});
 		}
 
