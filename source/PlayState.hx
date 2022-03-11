@@ -17,11 +17,10 @@ class PlayState extends FlxState
 {
 	var moan:FlxSound;
 	var player:FlxSprite;
+	var vignette:FlxSprite;
 	var died:Bool = false;
-	var currentLevel:String = "";
-	var npc:FlxSprite;
-	var npcversion:String = "";
-	public static var ending:String;
+	public static var currentLevel:String = "";
+	public static var ending:String = "";
 
 	override public function create()
 	{
@@ -32,25 +31,43 @@ class PlayState extends FlxState
 		player.y = FlxG.height / 2 - player.height / 2;
 		add(player);
 
+		vignette = new FlxSprite().loadGraphic("assets/images/vignette.png");
+		vignette.setGraphicSize(Std.int(vignette.width * 1.5));
+		vignette.screenCenter();
+		vignette.antialiasing = true;
+		vignette.alpha = 0;
+		add(vignette);
+
 		super.create();
 	}
 
 	var sped:Int = 0;
 	var zoomin:Bool = false;
+	var slowin:Bool = false;
 
 	override public function update(elapsed:Float)
 	{
-		var cooldown:Int = 1;
+		var zoom_cooldown:Int = 20;
+		var slow_cooldown:Int = 10;
 
 		if (FlxG.keys.justPressed.M) {
 			moan.play();
 		}
 
-		new FlxTimer().start(cooldown, function(tmr:FlxTimer) {
+		new FlxTimer().start(zoom_cooldown, function(tmr:FlxTimer) {
 			if (FlxG.keys.justPressed.SPACE) {
 				zoomin = true;
-				new FlxTimer().start(0.7, function(tmr:FlxTimer) {
+				new FlxTimer().start(15, function(tmr:FlxTimer) {
 					zoomin = false;
+				});
+			}
+		});
+
+		new FlxTimer().start(slow_cooldown, function(tmr:FlxTimer) {
+			if (FlxG.keys.justPressed.C) {
+				slowin = true;
+				new FlxTimer().start(7, function(tmr:FlxTimer) {
+					slowin = false;
 				});
 			}
 		});
@@ -62,7 +79,8 @@ class PlayState extends FlxState
 
 	function updateMovement()
 	{
-		if (zoomin) { sped = 15; }
+		if (zoomin) { zoomShit(); }
+		else if (slowin) { slowShit(); }
 		else { sped = 5; }
 
 		var _up:Bool = FlxG.keys.anyPressed([UP, W]);
@@ -73,5 +91,17 @@ class PlayState extends FlxState
 		if (_down) player.y += sped;
 		if (_left) player.x -= sped;
 		if (_right) player.x += sped;
+	}
+
+	function zoomShit() {
+		sped = 15;
+		FlxTween.tween(vignette, {alpha: 0.25}, 0.7, {ease: FlxEase.quartInOut});
+		FlxTween.tween(FlxG.camera, {zoom : 0.65}, 0.7, {ease: FlxEase.quartInOut});
+	}
+
+	function slowShit() {
+		sped = 1;
+		FlxTween.tween(vignette, {alpha: 1}, 0.7, {ease: FlxEase.quartInOut});
+		FlxTween.tween(FlxG.camera, {zoom : 1.35}, 0.7, {ease: FlxEase.quartInOut});
 	}
 }
