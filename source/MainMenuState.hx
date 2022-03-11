@@ -32,7 +32,6 @@ class MainMenuState extends FlxState
 		"play",
 		"settings",
 		"achievements",
-		"notifications",
 		"github",
 		"sound-test"
 	];
@@ -42,7 +41,6 @@ class MainMenuState extends FlxState
 		"Play",
 		"Settings",
 		"Achievements",
-		"Notifications",
 		"GitHub Page",
 		"Sound Test"
 	];
