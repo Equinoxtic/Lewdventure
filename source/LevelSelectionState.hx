@@ -10,6 +10,7 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.system.FlxSound;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import PlayState;
 
 using StringTools;
 
@@ -102,10 +103,34 @@ class LevelSelectionState extends FlxState
 	{
 		if (canSelect && !selectedSmth)
 		{
+			if (FlxG.keys.justPressed.UP) {
+				clickSound.play();
+				doDaScroll(-1);
+			}
+
+			if (FlxG.keys.justPressed.DOWN) {
+				clickSound.play();
+				doDaScroll(1);
+			}
+
 			if (FlxG.keys.justPressed.BACKSPACE) {
 				clickSound.play();
 				selectedSmth = true;
 				returnToChapterSelect();
+			}
+
+			if (FlxG.keys.justPressed.ENTER)
+			{
+				selectedSmth = true;
+				clickSound.play();
+				FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
+				FlxTween.tween(blackShit, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
+				lvlList.forEach(function(spr:FlxSprite) {
+					if (curSelected == spr.ID) {
+						var level:String = lvlShit[curSelected];
+						goToLevel(level, 1.1);
+					}
+				});
 			}
 		}
 
@@ -113,6 +138,16 @@ class LevelSelectionState extends FlxState
 
 		lvlList.forEach(function(spr:FlxSprite) {
 			spr.screenCenter(X);
+		});
+	}
+
+	function goToLevel(level:String, time:Float) {
+		new FlxTimer().start(time, function(tmr:FlxTimer) {
+			switch(level) {
+				case 'demo':
+					PlayState.currentLevel = 'demo';
+			}
+			FlxG.switchState(new PlayState());
 		});
 	}
 
