@@ -113,7 +113,7 @@ class MainMenuState extends FlxState
 		*/
 
 	 	blackshittwn = FlxTween.tween(blackshit, {alpha: 0.45}, 2.85, {ease: FlxEase.quartInOut});
-		vignettetwn = FlxTween.tween(vignette, {alpha: 0.45}, 2.35, {ease: FlxEase.quartInOut});
+		vignettetwn = FlxTween.tween(vignette, {alpha: 0.45}, 2.85, {ease: FlxEase.quartInOut});
 		new FlxTimer().start(blackshittwn.duration, function(tmr:FlxTimer) {
 			canSelect = true;
 		});
@@ -192,6 +192,18 @@ class MainMenuState extends FlxState
 					}
 				});
 			}
+		}
+		else
+		{
+			menuIcons.forEach(function(spr:FlxSprite) {
+				spr.alpha = 0;
+				FlxTween.tween(spr, {alpha: 1}, 2.85, {ease: FlxEase.quartInOut});
+			});
+
+			menuTxt.forEach(function(txt:FlxSprite) {
+				txt.alpha = 0;
+				FlxTween.tween(txt, {alpha: 1}, 2.85, {ease: FlxEase.quartInOut});
+			});
 		}
 
 		super.update(elapsed);
