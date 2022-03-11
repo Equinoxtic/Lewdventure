@@ -123,70 +123,75 @@ class MainMenuState extends FlxState
 
 	override public function update(elapsed:Float)
 	{
-		if (FlxG.keys.justPressed.BACKSPACE) {
-			selected = true;
-			clickSound.play();
-			returnToTitle();
-		}
-	
-
-		if (FlxG.keys.justPressed.UP) {
-			clickSound.play();
-			selected = true;
-			changeItem(-1);
-		}
-
-		if (FlxG.keys.justPressed.DOWN) {
-			clickSound.play();
-			selected = true;
-			changeItem(1);
-		}
-
-		if (FlxG.keys.justPressed.ENTER)
+		if (canSelect)
 		{
-			if (iconShit[curSelected] == 'github')
+			if (FlxG.keys.justPressed.BACKSPACE) {
+				selected = true;
+				clickSound.play();
+				returnToTitle();
+			}
+
+			if (FlxG.keys.justPressed.UP) {
+				clickSound.play();
+				selected = true;
+				changeItem(-1);
+			}
+
+			if (FlxG.keys.justPressed.DOWN) {
+				clickSound.play();
+				selected = true;
+				changeItem(1);
+			}
+
+			if (FlxG.keys.justPressed.ENTER)
 			{
-				var site:String = 'https://github.com/Equinoxtic/Lewdventure';
-				#if linux
-				Sys.command('/usr/bin/xdg-open', [site]);
-				#else
-				FlxG.openURL(site);
-				#end
+				if (iconShit[curSelected] == 'github')
+				{
+					var site:String = 'https://github.com/Equinoxtic/Lewdventure';
+					#if linux
+					Sys.command('/usr/bin/xdg-open', [site]);
+					#else
+					FlxG.openURL(site);
+					#end
+				}
+				else
+				{
+					selected = true;
+
+					clickSound.play();
+
+					FlxTween.tween(blackshit, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
+					FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
+
+					menuIcons.forEach(function(spr:FlxSprite) {
+						if (curSelected == spr.ID) {
+							var choice:String = iconShit[curSelected];
+							goToState(choice, 1.1);
+						}
+					});
+				}
 			}
 			else
 			{
-				selected = true;
+				menuIcons.forEach(function(spr:FlxSprite)
+				{
+					if (spr.ID != curSelected) {
+						spr.alpha = 0.65;
+					}
+					else {
+						spr.alpha = 1;
+					}
+				});
 
-				clickSound.play();
-
-				FlxTween.tween(blackshit, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
-				FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
-
-				menuIcons.forEach(function(spr:FlxSprite) {
-					if (curSelected == spr.ID) {
-						var choice:String = iconShit[curSelected];
-						goToState(choice, 1.1);
+				menuTxt.forEach(function(txt:FlxText) {
+					if (txt.ID != curSelected) {
+						txt.alpha = 0.65;
+					}
+					else {
+						txt.alpha = 1;
 					}
 				});
 			}
-		}
-		else
-		{
-			menuIcons.forEach(function(spr:FlxSprite) {
-				if (spr.ID != curSelected) {
-					spr.alpha = 0.65;
-				} else {
-					spr.alpha = 1;
-				}
-			});
-
-			menuTxt.forEach(function(txt:FlxText) {
-				if (txt.ID != curSelected) {
-					txt.alpha = 0.65;
-				} else {
-					txt.alpha = 1;
-				}
-			});
 		}
 
 		super.update(elapsed);
