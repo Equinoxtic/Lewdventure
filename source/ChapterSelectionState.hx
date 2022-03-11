@@ -25,12 +25,14 @@ class ChapterSelectionState extends FlxState
 
 	var chapterList:FlxTypedGroup<FlxSprite>;
 	var chapterShit:Array<String> = [
-		"limbo"
+		"limbo",
+		"test"
 	];
 	
 	var chapterText:FlxTypedGroup<FlxText>;
 	var chapterTextShit:Array<String> = [
-		"Limbo"
+		"Limbo",
+		"Test"
 	];
 
 	var canSelect:Bool = false;
@@ -42,7 +44,7 @@ class ChapterSelectionState extends FlxState
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
 		bg.screenCenter();
 		add(bg);
-		
+
 		chapterList = new FlxTypedGroup<FlxSprite>();
 		add(chapterList);
 
@@ -51,7 +53,7 @@ class ChapterSelectionState extends FlxState
 
 		for (i in 0...chapterShit.length)
 		{
-			var chapters:FlxSprite = new FlxSprite((i * 20), 0).loadGraphic("assets/images/chapters/chapter_" + chapterShit[i] + ".png");
+			var chapters:FlxSprite = new FlxSprite(0, 75 + (i * 405)).loadGraphic("assets/images/chapters/chapter_" + chapterShit[i] + ".png");
 			chapters.setGraphicSize(Std.int(chapters.width * 0.75));
 			chapters.alpha = 0.65;
 			chapters.antialiasing = true;
@@ -59,7 +61,7 @@ class ChapterSelectionState extends FlxState
 			chapterList.add(chapters);
 			chapters.updateHitbox();
 
-			var theText:FlxText = new FlxText((i * 20), chapters.y + 45, FlxG.width, "", 30);
+			var theText:FlxText = new FlxText(0, chapters.y - 45, FlxG.width, "", 30);
 			theText.setFormat(AssetPaths.CascadiaCodePL_Regular__ttf, 30, FlxColor.WHITE, CENTER);
 			theText.alpha = 0.65;
 			theText.text = chapterTextShit[i];
@@ -87,33 +89,31 @@ class ChapterSelectionState extends FlxState
 		});
 	}
 
-	var selected:Bool = false;
+	var selectedSmth:Bool = false;
 
 	override public function update(elapsed:Float)
 	{
 		if (canSelect)
 		{
-			if (FlxG.keys.justPressed.BACKSPACE) {
-				selected = true;
-				clickSound.play();
-				returnToMainMenu();
-			}
-
 			if (FlxG.keys.justPressed.UP) {
-				selected = true;
 				clickSound.play();
 				doDaScroll(-1);
 			}
 
 			if (FlxG.keys.justPressed.DOWN) {
-				selected = true;
 				clickSound.play();
 				doDaScroll(1);
 			}
 
+			if (FlxG.keys.justPressed.BACKSPACE) {
+				selectedSmth = true;
+				clickSound.play();
+				returnToMainMenu();
+			}
+
 			if (FlxG.keys.justPressed.ENTER)
 			{
-				selected = true;
+				selectedSmth = true;
 				clickSound.play();
 				FlxTween.tween(blackShit, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
 				FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
@@ -124,29 +124,28 @@ class ChapterSelectionState extends FlxState
 					}
 				});
 			}
-			else
-			{
-				chapterList.forEach(function(spr:FlxSprite) {
-					if (spr.ID != curSelected) {
-						spr.alpha = 0.65;
-					} else {
-						spr.alpha = 1;
-					}
-				});
-				chapterText.forEach(function(txt:FlxText) {
-					if (txt.ID != curSelected) {
-						txt.alpha = 0.65;
-					} else {
-						txt.alpha = 1;
-					}
-				});
-			}
 		}
+
+		chapterList.forEach(function(spr:FlxSprite) {
+			if (spr.ID != curSelected) {
+				spr.alpha = 0.65;
+			} else {
+				spr.alpha = 1;
+			}
+		});
+		chapterText.forEach(function(txt:FlxText)
+		{
+			if (txt.ID != curSelected) {
+				txt.alpha = 0.65;
+			} else {
+				txt.alpha = 1;
+			}
+		});
 
 		super.update(elapsed);
 
 		chapterList.forEach(function(spr:FlxSprite) {
-			spr.screenCenter();
+			spr.screenCenter(X);
 		});
 	}
 
@@ -176,6 +175,7 @@ class ChapterSelectionState extends FlxState
 				if (chapterList.length > 4) {
 					add = chapterList.length * 1;
 				}
+				// spr.centerOffsets();
 			}
 		});
 	}
