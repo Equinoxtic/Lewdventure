@@ -36,7 +36,7 @@ class LevelSelectionState extends FlxState
 
 		switch (currentChapter)
 		{
-			case "first":
+			case "limbo":
 				chapterPrefix = "first_chapter";
 		}
 
@@ -74,7 +74,7 @@ class LevelSelectionState extends FlxState
 	{
 		super.update(elapsed);
 		lvlList.forEach(function(spr:FlxSprite) {
-			spr.screenCenter(X);
+			spr.screenCenter();
 		});
 	}
 }
