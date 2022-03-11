@@ -67,10 +67,53 @@ class ChapterSelectionState extends FlxState
 		});
 	}
 
+	var selected:Bool = false;
+
 	override public function update(elapsed:Float)
 	{
 		if (canSelect)
 		{
+			if (FlxG.keys.justPressed.BACKSPACE) {
+				selected = true;
+				clickSound.play();
+				returnToMainMenu();
+			}
+
+			if (FlxG.keys.justPressed.UP) {
+				selected = true;
+				clickSound.play();
+				doDaScroll(-1);
+			}
+
+			if (FlxG.keys.justPressed.DOWN) {
+				selected = true;
+				clickSound.play();
+				doDaScroll(1);
+			}
+
+			if (FlxG.keys.justPressed.ENTER)
+			{
+				selected = true;
+				clickSound.play();
+				FlxTween.tween(blackShit, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
+				FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
+				chapterList.forEach(function(spr:FlxSprite) {
+					if (curSelected == spr.ID) {
+						var chapter:String = chapterShit[curSelected];
+						goToChapter(chapter, 1.1);
+					}
+				});
+			}
+			else
+			{
+				chapterList.forEach(function(spr:FlxSprite) {
+					if (spr.ID != curSelected) {
+						spr.alpha = 0.65;
+					} else {
+						spr.alpha = 1;
+					}
+				});
+			}
 		}
 
 		super.update(elapsed);
