@@ -40,16 +40,20 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float)
 	{
+		var cooldown:Int = 1;
+
 		if (FlxG.keys.justPressed.M) {
 			moan.play();
 		}
 
-		if (FlxG.keys.justPressed.SPACE) {
-			zoomin = true;
-			new FlxTimer().start(20, function(tmr:FlxTimer) {
-				zoomin = false;
-			});
-		}
+		new FlxTimer().start(cooldown, function(tmr:FlxTimer) {
+			if (FlxG.keys.justPressed.SPACE) {
+				zoomin = true;
+				new FlxTimer().start(0.7, function(tmr:FlxTimer) {
+					zoomin = false;
+				});
+			}
+		});
 
 		updateMovement();
 
@@ -58,7 +62,7 @@ class PlayState extends FlxState
 
 	function updateMovement()
 	{
-		if (zoomin) { sped = 10; }
+		if (zoomin) { sped = 15; }
 		else { sped = 5; }
 
 		var _up:Bool = FlxG.keys.anyPressed([UP, W]);
