@@ -4,6 +4,9 @@ import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.group.FlxGroup.FlxTypedGroup;
 
 using StringTools;
@@ -12,10 +15,13 @@ class ChapterSelectionState extends FlxState
 {
 	var vignette:FlxSprite;
 	var blackShit:FlxSprite;
+	var vignetteTwn:FlxTween;
+	var blackShitTwn:FlxTween;
 	var chapterList:FlxTypedGroup<FlxSprite>;
 	var chapterShit:Array<String> = [
 		"limbo"
 	];
+	var canSelect:Bool = false;
 
 	override public function create()
 	{
@@ -43,6 +49,12 @@ class ChapterSelectionState extends FlxState
 		add(blackShit);
 
 		super.create();
+
+		vignetteTwn = FlxTween.tween(vignette, {alpha: 0.45}, 2.85, {ease: FlxEase.quartInOut});
+		blackShitTwn = FlxTween.tween(blackShit, {alpha: 0.45}, 2.85, {ease: FlxEase.quartInOut});
+		new FlxTimer().start(vignetteTwn.duration, function(tmr:FlxTimer) {
+			canSelect = true;
+		});
 	}
 
 	override public function update(elapsed:Float)
