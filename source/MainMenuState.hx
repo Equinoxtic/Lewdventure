@@ -69,12 +69,14 @@ class MainMenuState extends FlxState
 			var icons:FlxSprite = new FlxSprite(0, 45 + (i * 75)).loadGraphic("assets/images/icons/icon_" + iconShit[i] + ".png");
 			icons.setGraphicSize(Std.int(icons.width * 0.45));
 			icons.antialiasing = true;
+			icons.alpha = 0.65;
 			icons.ID = i;
 			menuIcons.add(icons);
 			icons.updateHitbox();
 
 			var daText:FlxText = new FlxText(0, 45 + (i * 75), FlxG.width, "", 25);
 			daText.setFormat(AssetPaths.CascadiaCodePL_Regular__ttf, 25, FlxColor.WHITE, LEFT);
+			daText.alpha = 0.65;
 			daText.text = textShit[i];
 			daText.ID = i;
 			menuTxt.add(daText);
