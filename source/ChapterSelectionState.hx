@@ -7,6 +7,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
+import flixel.system.FlxSound;
 import flixel.group.FlxGroup.FlxTypedGroup;
 
 using StringTools;
@@ -17,6 +18,7 @@ class ChapterSelectionState extends FlxState
 	var blackShit:FlxSprite;
 	var vignetteTwn:FlxTween;
 	var blackShitTwn:FlxTween;
+	var scrollSound:FlxSound;
 	var chapterList:FlxTypedGroup<FlxSprite>;
 	var chapterShit:Array<String> = [
 		"limbo"
@@ -25,6 +27,8 @@ class ChapterSelectionState extends FlxState
 
 	override public function create()
 	{
+		scrollSound = FlxG.sound.load(AssetPaths.enter_sound__ogg);
+
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
 		bg.screenCenter();
 		add(bg);
@@ -63,7 +67,12 @@ class ChapterSelectionState extends FlxState
 
 	override public function update(elapsed:Float)
 	{
+		if (canSelect)
+		{
+		}
+
 		super.update(elapsed);
+
 		chapterList.forEach(function(spr:FlxSprite) {
 			spr.screenCenter();
 		});
