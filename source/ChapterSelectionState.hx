@@ -41,7 +41,7 @@ class ChapterSelectionState extends FlxState
 		for (i in 0...chapterShit.length)
 		{
 			var chapters:FlxSprite = new FlxSprite((i * 20), 0).loadGraphic("assets/images/chapters/chapter_" + chapterShit[i] + ".png");
-			chapters.setGraphicSize(Std.int(chapters.width * 0.5));
+			chapters.setGraphicSize(Std.int(chapters.width * 0.75));
 			chapters.antialiasing = true;
 			chapters.ID = i;
 			chapterList.add(chapters);

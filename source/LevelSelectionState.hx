@@ -44,7 +44,7 @@ class LevelSelectionState extends FlxState
 		{
 			var lvlThumbnails:FlxSprite = new FlxSprite();
 			lvlThumbnails.loadGraphic("assets/images/levels/" + chapterPrefix + "/level_" + lvlShit[i] + ".png");
-			lvlThumbnails.setGraphicSize(Std.int(lvlThumbnails.width * 0.5));
+			lvlThumbnails.setGraphicSize(Std.int(lvlThumbnails.width * 0.75));
 			lvlThumbnails.antialiasing = true;
 			lvlThumbnails.ID = i;
 			lvlList.add(lvlThumbnails);
