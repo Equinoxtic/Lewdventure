@@ -200,7 +200,7 @@ class MainMenuState extends FlxState
 		menuTxt.forEach(function(txt:FlxText) {
 			txt.x = 100;
 			if (txt.ID == curSelected) {
-				txt.alpha = 0.65
+				txt.alpha = 0.65;
 			}
 		});
 	}
