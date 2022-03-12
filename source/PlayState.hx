@@ -95,11 +95,19 @@ class PlayState extends FlxState
 		sped = 15;
 		FlxTween.tween(vignette, {alpha: 0.25}, 0.7, {ease: FlxEase.quartInOut});
 		FlxTween.tween(FlxG.camera, {zoom : 0.65}, 0.7, {ease: FlxEase.quartInOut});
+		if (!zoomin) {
+			FlxTween.tween(vignette, {alpha: 0}, 0.7, {ease: FlxEase.quartInOut});
+			FlxTween.tween(FlxG.camera, {zoom: 1}, 0.7, {ease: FlxEase.quartInOut});
+		}
 	}
 
 	function slowShit() {
 		sped = 1;
 		FlxTween.tween(vignette, {alpha: 1}, 0.7, {ease: FlxEase.quartInOut});
 		FlxTween.tween(FlxG.camera, {zoom : 1.35}, 0.7, {ease: FlxEase.quartInOut});
+		if (!slowin) {
+			FlxTween.tween(vignette, {alpha: 0}, 0.7, {ease: FlxEase.quartInOut});
+			FlxTween.tween(FlxG.camera, {zoom: 1}, 0.7, {ease: FlxEase.quartInOut});
+		}
 	}
 }
