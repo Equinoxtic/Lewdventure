@@ -21,33 +21,39 @@ class SoundTestState extends FlxState
 	var vignette:FlxSprite;
 	var blackShit:FlxSprite;
 	var soundTestSongs:FlxTypedGroup<FlxText>;
-	var stShit:Array<String> = [];
-	var stNames:Array<String> = [];
+	var stShit:Array<String> = [
+		"animoo_moan",
+		"enter_sound",
+		"music-test"
+	];
+	var stNames:Array<String> = [
+		"Moan",
+		"Click Sound 1",
+		"Music Test"
+	];
 	var canSelect:Bool = false;
 
 	override function create()
 	{
-		FlxG.sound.music.stop();
-
 		clickSound = FlxG.sound.load(AssetPaths.enter_sound__ogg);
+
+		bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
+		bg.screenCenter();
+		add(bg);
 
 		soundTestSongs = new FlxTypedGroup<FlxText>();
 		add(soundTestSongs);
 
 		for (i in 0...stShit.length)
 		{
-			var daContents:FlxText = new FlxText(0, 100 + (i * 20), FlxG.width, "", 20);
-			daContents.setFormat(AssetPaths.CascadiaCodePL_Regular__ttf, 20, FlxColor.WHITE, CENTER);
+			var daContents:FlxText = new FlxText(0, 45 + (i * 75), FlxG.width, "", 25);
+			daContents.setFormat(AssetPaths.CascadiaCodePL_Regular__ttf, 25, FlxColor.WHITE, LEFT);
 			daContents.alpha = 0.65;
 			daContents.text = stNames[i];
 			daContents.ID = i;
 			soundTestSongs.add(daContents);
 			daContents.updateHitbox();
 		}
-
-		bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
-		bg.screenCenter();
-		add(bg);
 
 		vignette = new FlxSprite().loadGraphic("assets/images/vignette.png");
 		vignette.setGraphicSize(Std.int(vignette.width * 1.5));
@@ -74,19 +80,79 @@ class SoundTestState extends FlxState
 	{
 		if (canSelect && !selectedSmth)
 		{
+			if (FlxG.keys.justPressed.UP) {
+				doLeScroll(-1);
+			}
+
+			if (FlxG.keys.justPressed.DOWN) {
+				doLeScroll(1);
+			}
+
 			if (FlxG.keys.justPressed.BACKSPACE) {
 				clickSound.play();
 				selectedSmth = true;
 				returnToMainMenu();
 			}
+
+			if (FlxG.keys.justPressed.ENTER)
+			{
+				/* if (stShit[curSelected] == 'music-test') {
+					goToMusicTest();
+				} */
+				var sound:String = stShit[curSelected];
+				playDaSound(sound);
+			}
 		}
+
+		soundTestSongs.forEach(function(txt:FlxText) {
+			if (txt.ID != curSelected) {
+				txt.alpha = 0.65;
+			} else {
+				txt.alpha = 1;
+			}
+		});
 
 		super.update(elapsed);
 
 		soundTestSongs.forEach(function(txt:FlxText) {
-			txt.screenCenter(X);
+			txt.x = 100;
 		});
 	}
+
+	function playDaSound(sound:String) {
+		FlxG.sound.play("assets/sounds/" + sound + ".ogg");
+	}
+
+	function doLeScroll(x:Int=0)
+	{
+		curSelected += x;
+		if (curSelected >= soundTestSongs.length) {
+			curSelected = 0;
+		}
+		if (curSelected < 0) {
+			curSelected = soundTestSongs.length - 1;
+		}
+		soundTestSongs.forEach(function(txt:FlxText) {
+			txt.updateHitbox();
+			if (txt.ID == curSelected) {
+				var add:Float = 0;
+				if (soundTestSongs.length > 4) {
+					add = soundTestSongs.length * 3;
+				}
+			}
+		});
+	}
+
+	/*
+	function goToMusicTest()
+	{
+		FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
+		FlxTween.tween(blackShit, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
+		new FlxTimer().start(1.1, function(tmr:FlxTimer) {
+			FlxG.switchState(new MusicTestState());
+		});
+	}
+	*/
 
 	function returnToMainMenu()
 	{
