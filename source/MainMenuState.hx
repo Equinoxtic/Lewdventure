@@ -207,6 +207,8 @@ class MainMenuState extends FlxState
 			switch (state) {
 				case 'play':
 					FlxG.switchState(new ChapterSelectionState());
+				case 'sound-test':
+					FlxG.switchState(new SoundTestState());
 			}
 		});
 	}
