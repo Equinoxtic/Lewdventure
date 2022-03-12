@@ -16,6 +16,7 @@ using StringTools;
 class MusicTestState extends FlxState
 {
 	public static var curSelected:Int = 0;
+	var click:FlxSound;
 	var vignette:FlxSprite;
 	var bleck:FlxSprite;
 	var musicList:FlxTypedGroup<FlxText>;
@@ -30,6 +31,8 @@ class MusicTestState extends FlxState
 	override public function create()
 	{
 		FlxG.sound.music.stop(); // just in case lol
+
+		click = FlxG.sound.load(AssetPaths.enter_sound__ogg);
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
 		bg.screenCenter();
@@ -68,8 +71,28 @@ class MusicTestState extends FlxState
 		});
 	}
 
+	var selectedSmth:Bool = false;
+
 	override public function update(elapsed:Float)
 	{
+		if (canSelect && !selectedSmth)
+		{
+			if (FlxG.keys.justPressed.BACKSPACE) {
+				click.play();
+				selectedSmth = true;
+				returnToSoundTest();
+			}
+		}
+
 		super.update(elapsed);
+	}
+
+	function returnToSoundTest()
+	{
+		FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
+		FlxTween.tween(bleck, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
+		new FlxTimer().start(1.1, function(tmr:FlxTimer) {
+			FlxG.switchState(new SoundTestState());
+		});
 	}
 }
