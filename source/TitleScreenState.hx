@@ -25,12 +25,13 @@ class TitleScreenState extends FlxState
 	var bleckTwn:FlxTween;
 	var transparencyVal:Float = 0.45;
 	var canSelect:Bool = false;
+
 	override public function create()
 	{
-		enterSound = FlxG.sound.load(AssetPaths.enter_sound__ogg);
+		enterSound = FlxG.sound.load(AssetPaths.title_confirm__ogg);
 
 		if (FlxG.sound.music == null) {
-			FlxG.sound.playMusic(AssetPaths.empty_ambience__ogg);
+			FlxG.sound.playMusic("assets/images/title_confirm.ogg");
 		}
 
 		titletxt = new FlxText(0, 0, 0, "Lewdventure", 50);
@@ -65,10 +66,13 @@ class TitleScreenState extends FlxState
 		*/
 	}
 
+	var selectedSmth:Bool = false;
+
 	override public function update(elapsed:Float)
 	{
-		if (canSelect) {
+		if (canSelect && !selectedSmth) {
 			if (FlxG.keys.justPressed.ENTER) {
+				selectedSmth = true;
 				enterSound.play();
 				FlxTween.tween(bleck, {alpha: 1}, bleckTwn.duration);
 				new FlxTimer().start(bleckTwn.duration, function(tmr:FlxTimer) {

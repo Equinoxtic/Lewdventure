@@ -28,7 +28,7 @@ class LoadingState extends FlxState
 		}
 
 		werningTxt = new FlxText(0, 0, FlxG.width, "", 25);
-		werningTxt.setFormat(AssetPaths.CascadiaCodePL_Regular__ttf, 25, FlxColor.WHITE, CENTER);
+		werningTxt.setFormat("assets/fonts/CascadiaCodePL-Regular.ttf", 25, FlxColor.WHITE, CENTER);
 		werningTxt.text = "WARNING\n\n" + "This game contains sexual and mature content.\n" + "Play it in a dark room all alone, and without your parents around you.\n" + "Enjoy the game, cupcake~..";
 		werningTxt.screenCenter();
 		werningTxt.alpha = 0;

@@ -47,7 +47,7 @@ class MusicTestState extends FlxState
 		for (i in 0...musicShit.length)
 		{
 			var musicTxt:FlxText = new FlxText(0, 45 + (i * 75), FlxG.width, "", 25);
-			musicTxt.setFormat(AssetPaths.CascadiaCodePL_Regular__ttf, 25, FlxColor.WHITE, LEFT);
+			musicTxt.setFormat("assets/fonts/CascadiaCodePL-Regular.ttf", 25, FlxColor.WHITE, LEFT);
 			musicTxt.alpha = 0.65;
 			musicTxt.text = musicTitles[i];
 			musicTxt.ID = i;
@@ -55,7 +55,7 @@ class MusicTestState extends FlxState
 			musicTxt.updateHitbox();
 		}
 
-		vignette = new FlxSprite().loadGraphic(AssetPaths.vignette__png);
+		vignette = new FlxSprite().loadGraphic("assets/images/vignette.png");
 		vignette.setGraphicSize(Std.int(vignette.width * 1.5));
 		vignette.screenCenter();
 		vignette.antialiasing = true;

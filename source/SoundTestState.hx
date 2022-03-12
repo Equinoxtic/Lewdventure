@@ -24,11 +24,13 @@ class SoundTestState extends FlxState
 	var soundTestSongs:FlxTypedGroup<FlxText>;
 	var stShit:Array<String> = [
 		"animoo_moan",
+		"title_confirm",
 		"enter_sound",
 		"music-test"
 	];
 	var stNames:Array<String> = [
 		"Moan",
+		"Title Enter",
 		"Click Sound 1",
 		"Music Test"
 	];
@@ -48,7 +50,7 @@ class SoundTestState extends FlxState
 		for (i in 0...stShit.length)
 		{
 			var daContents:FlxText = new FlxText(0, 45 + (i * 75), FlxG.width, "", 25);
-			daContents.setFormat(AssetPaths.CascadiaCodePL_Regular__ttf, 25, FlxColor.WHITE, LEFT);
+			daContents.setFormat("assets/fonts/CascadiaCodePL-Regular.ttf", 25, FlxColor.WHITE, LEFT);
 			daContents.alpha = 0.65;
 			daContents.text = stNames[i];
 			daContents.ID = i;

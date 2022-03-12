@@ -61,7 +61,7 @@ class LevelSelectionState extends FlxState
 
 		for (i in 0...lvlShit.length)
 		{
-			var lvlThumbnails:FlxSprite = new FlxSprite(0, 75 + (i * 405)).loadGraphic("assets/images/levels/" + chapterPrefix + "/level_" + lvlShit[i] + ".png");
+			var lvlThumbnails:FlxSprite = new FlxSprite(0, 0).loadGraphic("assets/images/levels/" + chapterPrefix + "/level_" + lvlShit[i] + ".png");
 			lvlThumbnails.setGraphicSize(Std.int(lvlThumbnails.width * 0.75));
 			lvlThumbnails.alpha = 0.65;
 			lvlThumbnails.antialiasing = true;
@@ -70,7 +70,7 @@ class LevelSelectionState extends FlxState
 			lvlThumbnails.updateHitbox();
 
 			var lvlTitle:FlxText = new FlxText(0, lvlThumbnails.y - 45, FlxG.width, "", 30);
-			lvlTitle.setFormat(AssetPaths.CascadiaCodePL_Regular__ttf, 30, FlxColor.WHITE, CENTER);
+			lvlTitle.setFormat("assets/fonts/CascadiaCodePL-Regular.ttf", 30, FlxColor.WHITE, LEFT);
 			lvlTitle.alpha = 0.65;
 			lvlTitle.text = lvlTitleShit[i];
 			lvlTitle.ID = i;
@@ -105,12 +105,14 @@ class LevelSelectionState extends FlxState
 		{
 			if (FlxG.keys.justPressed.UP) {
 				clickSound.play();
-				doDaScroll(-1);
+				// doDaScroll(-1);
+				wot('up');
 			}
 
 			if (FlxG.keys.justPressed.DOWN) {
 				clickSound.play();
-				doDaScroll(1);
+				// doDaScroll(1);
+				wot('down');
 			}
 
 			if (FlxG.keys.justPressed.BACKSPACE) {
@@ -153,7 +155,11 @@ class LevelSelectionState extends FlxState
 		super.update(elapsed);
 
 		lvlList.forEach(function(spr:FlxSprite) {
-			spr.screenCenter(X);
+			spr.screenCenter();
+		});
+
+		lvlTitleList.forEach(function(txt:FlxText) {
+			txt.x = 100;
 		});
 	}
 
@@ -183,6 +189,24 @@ class LevelSelectionState extends FlxState
 					add = lvlList.length * 1;
 				}
 				// spr.centerOffsets();
+			}
+		});
+	}
+
+	function wot(scrolldirect:String)
+	{
+		canSelect = false;
+		FlxTween.tween(vignette, {alpha: 1}, 0.8, {ease: FlxEase.expoOut});
+		FlxTween.tween(blackShit, {alpha: 1}, 0.8, {ease: FlxEase.expoOut});
+		new FlxTimer().start(0.8, function(tmr:FlxTimer) {
+			canSelect = true;
+			FlxTween.tween(vignette, {alpha: 0.45}, 0.8, {ease: FlxEase.expoOut});
+			FlxTween.tween(blackShit, {alpha: 0.45}, 0.8, {ease: FlxEase.expoOut});
+			switch (scrolldirect) {
+				case 'up':
+					doDaScroll(-1);
+				case 'down':
+					doDaScroll(1);
 			}
 		});
 	}

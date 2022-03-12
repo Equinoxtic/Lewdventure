@@ -76,7 +76,7 @@ class MainMenuState extends FlxState
 			icons.updateHitbox();
 
 			var daText:FlxText = new FlxText(0, 77 + (i * 75), FlxG.width, "", 25);
-			daText.setFormat(AssetPaths.CascadiaCodePL_Regular__ttf, 25, FlxColor.WHITE, LEFT);
+			daText.setFormat("assets/fonts/CascadiaCodePL-Regular.ttf", 25, FlxColor.WHITE, LEFT);
 			daText.alpha = 0.65;
 			daText.text = textShit[i];
 			daText.ID = i;

@@ -53,17 +53,17 @@ class ChapterSelectionState extends FlxState
 
 		for (i in 0...chapterShit.length)
 		{
-			var chapters:FlxSprite = new FlxSprite(0, 75 + (i * 405)).loadGraphic("assets/images/chapters/chapter_" + chapterShit[i] + ".png");
+			var chapters:FlxSprite = new FlxSprite(0, 0).loadGraphic("assets/images/chapters/chapter_" + chapterShit[i] + ".png");
 			chapters.setGraphicSize(Std.int(chapters.width * 0.75));
-			chapters.alpha = 0.65;
+			chapters.alpha = 0;
 			chapters.antialiasing = true;
 			chapters.ID = i;
 			chapterList.add(chapters);
 			chapters.updateHitbox();
 
 			var theText:FlxText = new FlxText(0, chapters.y - 45, FlxG.width, "", 30);
-			theText.setFormat(AssetPaths.CascadiaCodePL_Regular__ttf, 30, FlxColor.WHITE, CENTER);
-			theText.alpha = 0.65;
+			theText.setFormat("assets/fonts/CascadiaCodePL-Regular.ttf", 30, FlxColor.WHITE, LEFT);
+			theText.alpha = 0;
 			theText.text = chapterTextShit[i];
 			theText.ID = i;
 			chapterText.add(theText);
@@ -97,12 +97,14 @@ class ChapterSelectionState extends FlxState
 		{
 			if (FlxG.keys.justPressed.UP) {
 				clickSound.play();
-				doDaScroll(-1);
+				// doDaScroll(-1);
+				wot('up');
 			}
 
 			if (FlxG.keys.justPressed.DOWN) {
 				clickSound.play();
-				doDaScroll(1);
+				// doDaScroll(1);
+				wot('down');
 			}
 
 			if (FlxG.keys.justPressed.BACKSPACE) {
@@ -128,15 +130,16 @@ class ChapterSelectionState extends FlxState
 
 		chapterList.forEach(function(spr:FlxSprite) {
 			if (spr.ID != curSelected) {
-				spr.alpha = 0.65;
+				spr.alpha = 0;
 			} else {
 				spr.alpha = 1;
 			}
 		});
+
 		chapterText.forEach(function(txt:FlxText)
 		{
 			if (txt.ID != curSelected) {
-				txt.alpha = 0.65;
+				txt.alpha = 0;
 			} else {
 				txt.alpha = 1;
 			}
@@ -145,7 +148,11 @@ class ChapterSelectionState extends FlxState
 		super.update(elapsed);
 
 		chapterList.forEach(function(spr:FlxSprite) {
-			spr.screenCenter(X);
+			spr.screenCenter();
+		});
+
+		chapterText.forEach(function(txt:FlxText) {
+			txt.x = 100;
 		});
 	}
 
@@ -176,6 +183,24 @@ class ChapterSelectionState extends FlxState
 					add = chapterList.length * 1;
 				}
 				// spr.centerOffsets();
+			}
+		});
+	}
+
+	function wot(scrolldirect:String)
+	{
+		canSelect = false;
+		FlxTween.tween(vignette, {alpha: 1}, 0.8, {ease: FlxEase.expoOut});
+		FlxTween.tween(blackShit, {alpha: 1}, 0.8, {ease: FlxEase.expoOut});
+		new FlxTimer().start(0.8, function(tmr:FlxTimer) {
+			canSelect = true;
+			FlxTween.tween(vignette, {alpha: 0.45}, 0.8, {ease: FlxEase.expoOut});
+			FlxTween.tween(blackShit, {alpha: 0.45}, 0.8, {ease: FlxEase.expoOut});
+			switch(scrolldirect) {
+				case 'up':
+					doDaScroll(-1);
+				case 'down':
+					doDaScroll(1);
 			}
 		});
 	}
