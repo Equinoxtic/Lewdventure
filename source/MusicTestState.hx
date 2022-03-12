@@ -21,10 +21,12 @@ class MusicTestState extends FlxState
 	var bleck:FlxSprite;
 	var musicList:FlxTypedGroup<FlxText>;
 	var musicShit:Array<String> = [
-		"empty_ambience"
+		"empty_ambience",
+		"back"
 	];
 	var musicTitles:Array<String> = [
-		"Menu Ambience"
+		"Menu Ambience",
+		"Back"
 	];
 	var canSelect:Bool = false;
 
@@ -77,14 +79,72 @@ class MusicTestState extends FlxState
 	{
 		if (canSelect && !selectedSmth)
 		{
+			if (FlxG.keys.justPressed.UP) {
+				click.play();
+				changeDaItem(-1);
+			}
+
+			if (FlxG.keys.justPressed.DOWN) {
+				click.play();
+				changeDaItem(1);
+			}
+
+			/*
 			if (FlxG.keys.justPressed.BACKSPACE) {
 				click.play();
 				selectedSmth = true;
 				returnToSoundTest();
 			}
+			*/
+
+			if (FlxG.keys.justPressed.ENTER)
+			{
+				click.play();
+				if (musicShit[curSelected] == 'back') {
+					returnToSoundTest();
+				} else {
+					var music:String = musicShit[curSelected];
+					playMoosic(music);
+				}
+			}
 		}
 
+		musicList.forEach(function(txt:FlxText) {
+			if (txt.ID != curSelected) {
+				txt.alpha = 0.65;
+			} else {
+				txt.alpha = 1;
+			}
+		});
+
 		super.update(elapsed);
+
+		musicList.forEach(function(txt:FlxText) {
+			txt.x = 100;
+		});
+	}
+
+	function playMoosic(moosic:String) {
+		FlxG.sound.playMusic("assets/music/" + moosic + ".ogg");
+	}
+
+	function changeDaItem(iwhat:Int=0) {
+		curSelected += iwhat;
+		if (curSelected >= musicList.length) {
+			curSelected = 0;
+		}
+		if (curSelected < 0) {
+			curSelected = musicList.length - 1;
+		}
+		musicList.forEach(function(txt:FlxText) {
+			txt.updateHitbox();
+			if (txt.ID == curSelected) {
+				var add:Float = 0;
+				if (musicList.length > 4) {
+					add = musicList.length * 2;
+				}
+			}
+		});
 	}
 
 	function returnToSoundTest()
