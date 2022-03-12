@@ -127,6 +127,12 @@ class MainMenuState extends FlxState
 	{
 		if (canSelect && !selectedSmth)
 		{
+			if (FlxG.keys.justPressed.M) {
+				clickSound.play();
+				selectedSmth = true;
+				// goToMusicTest();
+			}
+
 			if (FlxG.keys.justPressed.UP) {
 				clickSound.play();
 				changeItem(-1);
@@ -176,8 +182,7 @@ class MainMenuState extends FlxState
 		menuIcons.forEach(function(spr:FlxSprite) {
 			if (spr.ID != curSelected) {
 				spr.alpha = 0.65;
-			}
-			else {
+			} else {
 				spr.alpha = 1;
 			}
 		});
@@ -185,8 +190,7 @@ class MainMenuState extends FlxState
 		menuTxt.forEach(function(txt:FlxText) {
 			if (txt.ID != curSelected) {
 				txt.alpha = 0.65;
-			}
-			else {
+			} else {
 				txt.alpha = 1;
 			}
 		});
@@ -242,4 +246,15 @@ class MainMenuState extends FlxState
 			FlxG.switchState(new TitleScreenState());
 		});
 	}
+
+	/*
+	function goToMusicTest()
+	{
+		FlxTween.tween(blackshit, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
+		FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
+		new FlxTimer().start(1.1, function(tmr:FlxTimer) {
+			FlxG.switchState(new MusicTestState());
+		});
+	}
+	*/
 }
