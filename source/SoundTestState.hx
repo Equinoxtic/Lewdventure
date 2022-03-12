@@ -91,16 +91,17 @@ class SoundTestState extends FlxState
 			if (FlxG.keys.justPressed.BACKSPACE) {
 				clickSound.play();
 				selectedSmth = true;
-				returnToMainMenu();
+				goToState('main-menu');
 			}
 
 			if (FlxG.keys.justPressed.ENTER)
 			{
-				/* if (stShit[curSelected] == 'music-test') {
-					goToMusicTest();
-				} */
-				var sound:String = stShit[curSelected];
-				playDaSound(sound);
+				if (stShit[curSelected] == 'music-test') {
+					goToState('music-test');
+				} else {
+					var sound:String = stShit[curSelected];
+					playDaSound(sound);
+				}
 			}
 		}
 
@@ -143,23 +144,17 @@ class SoundTestState extends FlxState
 		});
 	}
 
-	/*
-	function goToMusicTest()
+	function goToState(state:String)
 	{
 		FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
 		FlxTween.tween(blackShit, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
 		new FlxTimer().start(1.1, function(tmr:FlxTimer) {
-			FlxG.switchState(new MusicTestState());
-		});
-	}
-	*/
-
-	function returnToMainMenu()
-	{
-		FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
-		FlxTween.tween(blackShit, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
-		new FlxTimer().start(1.1, function(tmr:FlxTimer) {
-			FlxG.switchState(new MainMenuState());
+			switch(state) {
+				case 'music-test':
+					FlxG.switchState(new MusicTestState());
+				case 'main-menu':
+					FlxG.switchState(new MainMenuState());
+			}
 		});
 	}
 }
