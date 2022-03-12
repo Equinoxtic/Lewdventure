@@ -69,7 +69,7 @@ class LevelSelectionState extends FlxState
 			lvlList.add(lvlThumbnails);
 			lvlThumbnails.updateHitbox();
 
-			var lvlTitle:FlxText = new FlxText(0, lvlThumbnails.y - 45, FlxG.width, "", 30);
+			var lvlTitle:FlxText = new FlxText(0, lvlThumbnails.y + 45, FlxG.width, "", 30);
 			lvlTitle.setFormat("assets/fonts/CascadiaCodePL-Regular.ttf", 30, FlxColor.WHITE, LEFT);
 			lvlTitle.alpha = 0.65;
 			lvlTitle.text = lvlTitleShit[i];

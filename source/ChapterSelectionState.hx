@@ -61,7 +61,7 @@ class ChapterSelectionState extends FlxState
 			chapterList.add(chapters);
 			chapters.updateHitbox();
 
-			var theText:FlxText = new FlxText(0, chapters.y - 45, FlxG.width, "", 30);
+			var theText:FlxText = new FlxText(0, chapters.y + 45, FlxG.width, "", 30);
 			theText.setFormat("assets/fonts/CascadiaCodePL-Regular.ttf", 30, FlxColor.WHITE, LEFT);
 			theText.alpha = 0;
 			theText.text = chapterTextShit[i];
