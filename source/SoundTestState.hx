@@ -141,7 +141,7 @@ class SoundTestState extends FlxState
 			if (txt.ID == curSelected) {
 				var add:Float = 0;
 				if (soundTestSongs.length > 4) {
-					add = soundTestSongs.length * 3;
+					add = soundTestSongs.length * 4;
 				}
 			}
 		});

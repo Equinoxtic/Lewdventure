@@ -23,10 +23,12 @@ class MusicTestState extends FlxState
 	var musicList:FlxTypedGroup<FlxText>;
 	var musicShit:Array<String> = [
 		"empty_ambience",
+		"scare",
 		"back"
 	];
 	var musicTitles:Array<String> = [
 		"Menu Ambience",
+		"???",
 		"Back"
 	];
 	var canSelect:Bool = false;
@@ -142,7 +144,7 @@ class MusicTestState extends FlxState
 			if (txt.ID == curSelected) {
 				var add:Float = 0;
 				if (musicList.length > 4) {
-					add = musicList.length * 2;
+					add = musicList.length * 3;
 				}
 			}
 		});
