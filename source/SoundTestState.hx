@@ -10,6 +10,7 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.system.FlxSound;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import MusicTestState;
 
 using StringTools;
 
@@ -151,6 +152,7 @@ class SoundTestState extends FlxState
 		new FlxTimer().start(1.1, function(tmr:FlxTimer) {
 			switch(state) {
 				case 'music-test':
+					MusicTestState.fromSoundTest = true;
 					FlxG.switchState(new MusicTestState());
 				case 'main-menu':
 					FlxG.switchState(new MainMenuState());

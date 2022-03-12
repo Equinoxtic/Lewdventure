@@ -10,6 +10,7 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.system.FlxSound;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import MusicTestState;
 
 using StringTools;
 
@@ -74,7 +75,7 @@ class MainMenuState extends FlxState
 			menuIcons.add(icons);
 			icons.updateHitbox();
 
-			var daText:FlxText = new FlxText(0, 75 + (i * 75), FlxG.width, "", 25);
+			var daText:FlxText = new FlxText(0, 77 + (i * 75), FlxG.width, "", 25);
 			daText.setFormat(AssetPaths.CascadiaCodePL_Regular__ttf, 25, FlxColor.WHITE, LEFT);
 			daText.alpha = 0.65;
 			daText.text = textShit[i];
@@ -130,7 +131,7 @@ class MainMenuState extends FlxState
 			if (FlxG.keys.justPressed.M) {
 				clickSound.play();
 				selectedSmth = true;
-				// goToMusicTest();
+				goToMusicTest();
 			}
 
 			if (FlxG.keys.justPressed.UP) {
@@ -247,14 +248,13 @@ class MainMenuState extends FlxState
 		});
 	}
 
-	/*
 	function goToMusicTest()
 	{
 		FlxTween.tween(blackshit, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
 		FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
 		new FlxTimer().start(1.1, function(tmr:FlxTimer) {
+			MusicTestState.fromSoundTest = false;
 			FlxG.switchState(new MusicTestState());
 		});
 	}
-	*/
 }

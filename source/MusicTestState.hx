@@ -15,6 +15,7 @@ using StringTools;
 
 class MusicTestState extends FlxState
 {
+	public static var fromSoundTest:Bool = false;
 	public static var curSelected:Int = 0;
 	var click:FlxSound;
 	var vignette:FlxSprite;
@@ -101,7 +102,7 @@ class MusicTestState extends FlxState
 			{
 				click.play();
 				if (musicShit[curSelected] == 'back') {
-					returnToSoundTest();
+					returnToState();
 				} else {
 					var music:String = musicShit[curSelected];
 					playMoosic(music);
@@ -147,12 +148,16 @@ class MusicTestState extends FlxState
 		});
 	}
 
-	function returnToSoundTest()
+	function returnToState()
 	{
 		FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
 		FlxTween.tween(bleck, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
 		new FlxTimer().start(1.1, function(tmr:FlxTimer) {
-			FlxG.switchState(new SoundTestState());
+			if (fromSoundTest) {
+				FlxG.switchState(new SoundTestState());
+			} else {
+				FlxG.switchState(new MainMenuState());
+			}
 		});
 	}
 }
