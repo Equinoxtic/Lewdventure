@@ -66,7 +66,7 @@ class MainMenuState extends FlxState
 
 		for (i in 0...iconShit.length)
 		{
-			var icons:FlxSprite = new FlxSprite(0, 45 + (i * 75)).loadGraphic("assets/images/icons/icon_" + iconShit[i] + ".png");
+			var icons:FlxSprite = new FlxSprite(0, 75 + (i * 75)).loadGraphic("assets/images/icons/icon_" + iconShit[i] + ".png");
 			icons.setGraphicSize(Std.int(icons.width * 0.45));
 			icons.antialiasing = true;
 			icons.alpha = 0.65;
