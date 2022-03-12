@@ -31,7 +31,7 @@ class TitleScreenState extends FlxState
 		enterSound = FlxG.sound.load(AssetPaths.title_confirm__ogg);
 
 		if (FlxG.sound.music == null) {
-			FlxG.sound.playMusic("assets/images/title_confirm.ogg");
+			FlxG.sound.playMusic(AssetPaths.empty_ambience__ogg);
 		}
 
 		titletxt = new FlxText(0, 0, 0, "Lewdventure", 50);
