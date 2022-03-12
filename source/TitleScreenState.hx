@@ -14,6 +14,7 @@ using StringTools;
 
 class TitleScreenState extends FlxState
 {
+	var white:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
 	var bleck:FlxSprite;
 	var vignette:FlxSprite;
 	// var ambience:FlxSound;
@@ -42,7 +43,16 @@ class TitleScreenState extends FlxState
 		pressEnter.screenCenter(X);
 		add(pressEnter);
 
-		bleck = new FlxSprite().makeGraphic(FlxG.height, FlxG.width, FlxColor.BLACK);
+		add(white);
+		white.alpha = 0;
+
+		vignette = new FlxSprite().loadGraphic("assets/images/vignette.png");
+		vignette.setGraphicSize(Std.int(vignette.width * 1.5));
+		vignette.antialiasing = true;
+		vignette.screenCenter();
+		add(vignette);
+
+		bleck = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bleck.screenCenter();
 		add(bleck);
 
@@ -55,6 +65,7 @@ class TitleScreenState extends FlxState
 		}});
 		*/
 
+		FlxTween.tween(vignette, {alpha: transparencyVal}, 1.35);
 		bleckTwn = FlxTween.tween(bleck, {alpha: transparencyVal}, 1.35, {onComplete: function(twn:FlxTween) {
 			canSelect = true;
 		}});
@@ -74,12 +85,21 @@ class TitleScreenState extends FlxState
 			if (FlxG.keys.justPressed.ENTER) {
 				selectedSmth = true;
 				enterSound.play();
+				pulse(0.85);
 				FlxTween.tween(bleck, {alpha: 1}, bleckTwn.duration);
+				FlxTween.tween(vignette, {alpha: 1}, bleckTwn.duration);
 				new FlxTimer().start(bleckTwn.duration, function(tmr:FlxTimer) {
 					FlxG.switchState(new MainMenuState());
 				});
 			}
 		}
 		super.update(elapsed);
+	}
+
+	function pulse(initalpha:Float)
+	{
+		white.screenCenter();
+		white.alpha = initalpha;
+		FlxTween.tween(white, {alpha: 0}, 1.1, {ease: FlxEase.quartInOut});
 	}
 }
