@@ -24,7 +24,14 @@ class PlayState extends FlxState
 	{
 		moan = FlxG.sound.load(AssetPaths.animoo_moan__ogg);
 
-		player = new FlxSprite().makeGraphic(25, 25, FlxColor.WHITE);
+		if (currentLevel == 'demo')
+		{
+			var white:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
+			white.screenCenter();
+			add(white);
+		}
+
+		player = new FlxSprite().makeGraphic(25, 25, FlxColor.BLUE);
 		player.x = FlxG.width / 2 - player.width / 2;
 		player.y = FlxG.height / 2 - player.height / 2;
 		add(player);
@@ -52,23 +59,39 @@ class PlayState extends FlxState
 			moan.play();
 		}
 
-		new FlxTimer().start(zoom_cooldown, function(tmr:FlxTimer) {
-			if (FlxG.keys.justPressed.SPACE) {
-				zoomin = true;
-				new FlxTimer().start(15, function(tmr:FlxTimer) {
-					zoomin = false;
-				});
+		/* These were all just for fun and I never got them to work properly :skull:
+		if (!slowin)
+		{
+			new FlxTimer().start(zoom_cooldown, function(tmr:FlxTimer) {
+				if (FlxG.keys.justPressed.SPACE) {
+					zoomin = true;
+					new FlxTimer().start(15, function(tmr:FlxTimer) {
+						zoomin = false;
+					});
+				}
+			});
+			if (!zoomin) {
+				FlxTween.tween(vignette, {alpha: 0}, 0.7, {ease: FlxEase.quartInOut});
+				FlxTween.tween(FlxG.camera, {zoom: 1}, 0.7, {ease: FlxEase.quartInOut});
 			}
-		});
+		}
 
-		new FlxTimer().start(slow_cooldown, function(tmr:FlxTimer) {
-			if (FlxG.keys.justPressed.C) {
-				slowin = true;
-				new FlxTimer().start(7, function(tmr:FlxTimer) {
-					slowin = false;
-				});
+		if (!zoomin)
+		{
+			new FlxTimer().start(slow_cooldown, function(tmr:FlxTimer) {
+				if (FlxG.keys.justPressed.C) {
+					slowin = true;
+					new FlxTimer().start(7, function(tmr:FlxTimer) {
+						slowin = false;
+					});
+				}
+			});
+			if (!slowin) {
+				FlxTween.tween(vignette, {alpha: 0}, 0.7, {ease: FlxEase.quartInOut});
+				FlxTween.tween(FlxG.camera, {zoom: 1}, 0.7, {ease: FlxEase.quartInOut});
 			}
-		});
+		}
+		*/
 
 		updateMovement();
 
@@ -77,9 +100,11 @@ class PlayState extends FlxState
 
 	function updateMovement()
 	{
-		if (zoomin) { zoomShit(); }
-		else if (slowin) { slowShit(); }
-		else { sped = 5; }
+		// if (zoomin) { zoomShit(); }
+		// else if (slowin) { slowShit(); }
+		// else { sped = 5; }
+
+		sped = 5;
 
 		var _up:Bool = FlxG.keys.anyPressed([UP, W]);
 		var _down:Bool = FlxG.keys.anyPressed([DOWN, S]);
@@ -90,24 +115,20 @@ class PlayState extends FlxState
 		if (_left) player.x -= sped;
 		if (_right) player.x += sped;
 	}
-
+	
+	/*
 	function zoomShit() {
 		sped = 15;
 		FlxTween.tween(vignette, {alpha: 0.25}, 0.7, {ease: FlxEase.quartInOut});
 		FlxTween.tween(FlxG.camera, {zoom : 0.65}, 0.7, {ease: FlxEase.quartInOut});
-		if (!zoomin) {
-			FlxTween.tween(vignette, {alpha: 0}, 0.7, {ease: FlxEase.quartInOut});
-			FlxTween.tween(FlxG.camera, {zoom: 1}, 0.7, {ease: FlxEase.quartInOut});
-		}
 	}
+	*/
 
+	/*
 	function slowShit() {
 		sped = 1;
 		FlxTween.tween(vignette, {alpha: 1}, 0.7, {ease: FlxEase.quartInOut});
 		FlxTween.tween(FlxG.camera, {zoom : 1.35}, 0.7, {ease: FlxEase.quartInOut});
-		if (!slowin) {
-			FlxTween.tween(vignette, {alpha: 0}, 0.7, {ease: FlxEase.quartInOut});
-			FlxTween.tween(FlxG.camera, {zoom: 1}, 0.7, {ease: FlxEase.quartInOut});
-		}
 	}
+	*/
 }
