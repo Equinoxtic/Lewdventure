@@ -63,7 +63,7 @@ class LevelSelectionState extends FlxState
 		{
 			var lvlThumbnails:FlxSprite = new FlxSprite(0, 0).loadGraphic("assets/images/levels/" + chapterPrefix + "/level_" + lvlShit[i] + ".png");
 			lvlThumbnails.setGraphicSize(Std.int(lvlThumbnails.width * 0.75));
-			lvlThumbnails.alpha = 0.65;
+			lvlThumbnails.alpha = 0;
 			lvlThumbnails.antialiasing = true;
 			lvlThumbnails.ID = i;
 			lvlList.add(lvlThumbnails);
@@ -71,7 +71,7 @@ class LevelSelectionState extends FlxState
 
 			var lvlTitle:FlxText = new FlxText(0, lvlThumbnails.y + 45, FlxG.width, "", 30);
 			lvlTitle.setFormat("assets/fonts/CascadiaCodePL-Regular.ttf", 30, FlxColor.WHITE, LEFT);
-			lvlTitle.alpha = 0.65;
+			lvlTitle.alpha = 0;
 			lvlTitle.text = lvlTitleShit[i];
 			lvlTitle.ID = i;
 			lvlTitleList.add(lvlTitle);
@@ -138,7 +138,7 @@ class LevelSelectionState extends FlxState
 
 		lvlList.forEach(function(spr:FlxSprite) {
 			if (spr.ID != curSelected) {
-				spr.alpha = 0.65;
+				spr.alpha = 0;
 			} else {
 				spr.alpha = 1;
 			}
@@ -146,7 +146,7 @@ class LevelSelectionState extends FlxState
 
 		lvlTitleList.forEach(function(txt:FlxText) {
 			if (txt.ID != curSelected) {
-				txt.alpha = 0.65;
+				txt.alpha = 0;
 			} else {
 				txt.alpha = 1;
 			}
