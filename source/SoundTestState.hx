@@ -24,12 +24,14 @@ class SoundTestState extends FlxState
 	var soundTestSongs:FlxTypedGroup<FlxText>;
 	var stShit:Array<String> = [
 		"animoo_moan",
+		"orgasm",
 		"title_confirm",
 		"enter_sound",
 		"music-test"
 	];
 	var stNames:Array<String> = [
 		"Moan",
+		"Orgasm",
 		"Title Enter",
 		"Click Sound 1",
 		"Music Test"
