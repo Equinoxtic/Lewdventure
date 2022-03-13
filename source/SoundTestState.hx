@@ -151,7 +151,7 @@ class SoundTestState extends FlxState
 	{
 		FlxTween.tween(vignette, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
 		FlxTween.tween(blackShit, {alpha: 1}, 1.1, {ease: FlxEase.quartInOut});
-		new FlxTimer().start(1.1, function(tmr:FlxTimer) {
+		new FlxTimer().start(1.15, function(tmr:FlxTimer) {
 			switch(state) {
 				case 'music-test':
 					MusicTestState.fromSoundTest = true;
