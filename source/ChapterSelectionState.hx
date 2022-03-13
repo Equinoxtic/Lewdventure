@@ -95,16 +95,16 @@ class ChapterSelectionState extends FlxState
 	{
 		if (canSelect)
 		{
-			if (FlxG.keys.justPressed.UP) {
+			if (FlxG.keys.justPressed.LEFT) {
 				clickSound.play();
 				// doDaScroll(-1);
-				wot('up');
+				wot('left');
 			}
 
-			if (FlxG.keys.justPressed.DOWN) {
+			if (FlxG.keys.justPressed.RIGHT) {
 				clickSound.play();
 				// doDaScroll(1);
-				wot('down');
+				wot('right');
 			}
 
 			if (FlxG.keys.justPressed.BACKSPACE) {
@@ -197,9 +197,9 @@ class ChapterSelectionState extends FlxState
 			FlxTween.tween(vignette, {alpha: 0.45}, 0.8, {ease: FlxEase.expoOut});
 			FlxTween.tween(blackShit, {alpha: 0.45}, 0.8, {ease: FlxEase.expoOut});
 			switch(scrolldirect) {
-				case 'up':
+				case 'left':
 					doDaScroll(-1);
-				case 'down':
+				case 'right':
 					doDaScroll(1);
 			}
 		});
